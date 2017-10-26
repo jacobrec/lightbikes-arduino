@@ -1,0 +1,25 @@
+Light bikes
+Inspired by [Tron Legacy](https://en.wikipedia.org/wiki/Tron:_Legacy)
+
+# Parts of the project
+
+## Titlescreen
+
+Will have a select for whether to start, 2 player mode, or 1 player + A.I.
+In the background is 2 A.I. Players playing
+
+## The battlefield
+Bikes leave a trail of lights.
+If a bike runs into a trail it dies.
+The goal is to be the last one left.
+Don't run into trails.
+
+### Player
+Player control is done by using the joystick
+
+### A.I.
+Looks ahead a few cycles trying all possible combinations to see which is the best conditions
+Each cycle both players could make 3 different moves, turn left, turn right, move straight
+The best conditions would be maximizing it's space on a [Voronoi Diagram](https://en.wikipedia.org/wiki/Voronoi_diagram)
+Voronoi Diagram would be calculated using Dijkstra's or A* algorithm
+If too slow with all the searching on every point, use a Monte Carlo approximation

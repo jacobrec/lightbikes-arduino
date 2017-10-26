@@ -1,0 +1,17 @@
+### Bikes
+A class that handles the bikes
+
+public:
+void moveLeft();
+void moveRight();
+void moveForward();
+bool isAlive();
+
+void doMove();
+
+private:
+controller control;
+void didCrash();
+void addLine();
+
+Both players and A.I. implement controller, doMove() uses it's controller
