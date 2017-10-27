@@ -16,17 +16,27 @@ Bikes leave a trail of lights.
 If a bike runs into a trail it dies.
 The goal is to be the last one left.
 Don't run into trails.
+Constant time between frame ticks
 
 #### Player
 Player control is done by using the joystick
 
-#### A.I.
+#### A.I. ideas
 ##### Simple
 Goes straight has a 10 percent chance to randomly turn left or right.
 If would drive into a tile that it can avoid, it will.
 
+##### Medium complexity
+Finite state machine:
+states would be early game, middle game, end game, attacking, defending
+each would have it's own routine where behavior is defined differently
+eg)
+    starts in early game, board is relatively free, once a certain amount of lines are placed, switch to middle game.
+    If in an attacking position switch to attacking, if forced into a defensive position, switch to defense.
+    Once the player and enemy are in separate boxes switch to endgame.
+    
 ##### Complex
-Looks ahead a few cycles trying all possible combinations to see which is the best conditions.
+Looks ahead a few ticks trying all possible combinations of moves to see which is the best condition.
 Each cycle both players could make 3 different moves, turn left, turn right, move straight.
 The best conditions would be maximizing it's space on a [Voronoi Diagram](https://en.wikipedia.org/wiki/Voronoi_diagram).
 Voronoi Diagram would be calculated using Dijkstra's or A* algorithm.
@@ -34,7 +44,8 @@ If too slow with all the searching on every point, use a Monte Carlo approximati
 
 ## Milestone goals
 - [ ] Have a working two player light bike game
-- [ ] Create a title screen
+- [ ] Create a basic title screen
 - [ ] Create a basic A.I. player for 1 player mode
+- [ ] Create a title screen with A.I. players competing
 - [ ] Create a more advanced A.I.
 - [ ] Adjustable difficulties for the A.I.
