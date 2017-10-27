@@ -26,7 +26,7 @@ Player control is done by using the joystick
 Goes straight has a 10 percent chance to randomly turn left or right.
 If would drive into a tile that it can avoid, it will.
 
-##### Medium complexity
+##### Finite State
 Finite state machine:
 states would be early game, middle game, end game, attacking, defending
 each would have it's own routine where behavior is defined differently
@@ -34,8 +34,16 @@ eg)
     starts in early game, board is relatively free, once a certain amount of lines are placed, switch to middle game.
     If in an attacking position switch to attacking, if forced into a defensive position, switch to defense.
     Once the player and enemy are in separate boxes switch to endgame.
-    
-##### Complex
+
+##### Neural Network
+Input nodes would be the state of every cell on the board
+Output nodes would be two representing a Binary Encoded decimal corresponding to the move choice, left, right, or straight
+Trained with a genetic algorithm, playing against itself, maybe even against other A.I.
+
+##### Deep Neural Network
+Same as above but with 2 layers of hidden neurons, requires more training
+
+##### Min-Max with Alpha–beta pruning
 Looks ahead a few ticks trying all possible combinations of moves to see which is the best condition.
 Each cycle both players could make 3 different moves, turn left, turn right, move straight.
 The best conditions would be maximizing it's space on a [Voronoi Diagram](https://en.wikipedia.org/wiki/Voronoi_diagram).
