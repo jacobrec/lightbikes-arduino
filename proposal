@@ -21,7 +21,10 @@ Constant time between frame ticks
 #### Player
 Player control is done by using the joystick
 
-#### A.I. ideas
+Can choose color at beginning of game
+
+#### A.I. ideas 
+(will probably not implement all ideas, just some)
 ##### Simple
 Goes straight has a 10 percent chance to randomly turn left or right.
 If would drive into a tile that it can avoid, it will.
@@ -54,6 +57,7 @@ If too slow with all the searching on every point, use a Monte Carlo approximati
 - [ ] Have a working two player light bike game
 - [ ] Create a basic title screen
 - [ ] Create a basic A.I. player for 1 player mode
+- [ ] Create player color selection system
 - [ ] Create a title screen with A.I. players competing
-- [ ] Create a more advanced A.I.
+- [ ] Create a more advanced A.I. (new A.I. or variable difficulty for basic A.I.)
 - [ ] Adjustable difficulties for the A.I.
