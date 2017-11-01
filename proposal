@@ -24,7 +24,10 @@ Player control is done by using the joystick
 Can choose color at beginning of game
 
 #### A.I. ideas 
-(will probably not implement all ideas, just some)
+For the A.I. we would like to implement several different stratagies, 
+these are some of our initial thoughts on A.I. strategies and all likely will not make it into the final implementation.
+
+
 ##### Simple
 Goes straight has a 10 percent chance to randomly turn left or right.
 If would drive into a tile that it can avoid, it will.
