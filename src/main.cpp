@@ -3,6 +3,7 @@
 #include "objects.h"
 #include "game.h"
 #include "drawing.h"
+#include "driver.h"
 
 #define millisPerCycle    50           /* 50 is milliseconds */
 void ensureFrameRate(long frameCount); // Predeclare function
@@ -13,9 +14,9 @@ int main() {
 
 
     //setup game
-    Grid_t *grid = initWorld(64, 48);            // create a new grid, the central world object of size 64x48
-    setUpGraphics(grid);                         // initializes the graphics system, as well as draws boarder
-    long frameCount = millis() / millisPerCycle; // initialize the framecount variable, this is used to get a constant framerate
+    Grid_t *grid = initWorld(64, 48, new StayingAlive_Driver(), new StayingAlive_Driver()); // create a new grid, the central world object of size 64x48
+    setUpGraphics(grid);                                                                    // initializes the graphics system, as well as draws boarder
+    long frameCount = millis() / millisPerCycle;                                            // initialize the framecount variable, this is used to get a constant framerate
 
 
     // main game loop
