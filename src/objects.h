@@ -19,6 +19,8 @@ private:
 public:
     // height and width must be divisible by 2 due to the encoding, this encoding however uses 25% of the memory it would otherwise use
     Grid_t(int height, int width, Driver_t *d1, Driver_t *d2);
+    ~Grid_t();
+
     Tile getTile(int x, int y);
     void makeWall(int x, int y, int playerNumber);
 
@@ -38,6 +40,8 @@ private:
 
 public:
     Bike_t(int x, int y, int id, Direction_t, Driver_t *);
+    ~Bike_t();
+
     void drive(Grid_t *grid);
 
     int         x;
@@ -52,6 +56,9 @@ class Driver_t {
 protected:
     Bike_t *myBike;
 public:
+
+    ~Driver_t();
+
     void setBike(Bike_t *bike);
 
     virtual Turn_t steer(Grid_t *grid) { // this method is to be extended to form the differnt behaviors of the driver types

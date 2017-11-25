@@ -4,6 +4,7 @@ private:
     Grid_t *grid;
 public:
     GameScreen(Driver_t *d1, Driver_t *d2);
+    ~GameScreen();
 
     void frame();
 };

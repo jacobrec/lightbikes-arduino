@@ -28,6 +28,7 @@ private:
 
 public:
     ScreenManager(int millisPerFrame);
+    ~ScreenManager();
     void manageScreen();
     void setScreen(Screen *screen);
 };

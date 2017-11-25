@@ -8,3 +8,7 @@ void GameScreen::frame() {
     update(this->grid);            // updates game world
     render(this->grid);            // renders the world
 }
+
+GameScreen::~GameScreen(){
+    delete this->grid;
+}

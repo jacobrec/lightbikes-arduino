@@ -34,9 +34,15 @@ void ScreenManager::ensureFrameRate() {
 }
 
 void ScreenManager::setScreen(Screen *screen) {
-    this->frameCount = millis() / millisPerFrame; // initialize the framecount variable, this is used to get a constant framerate
     screen->setManager(this);
+
     this->currentScreen = screen;
+    this->frameCount = millis() / millisPerFrame; // initialize the framecount variable, this is used to get a constant framerate
+
+}
+
+ScreenManager::~ScreenManager() {
+    delete this->currentScreen;
 }
 
 #include "screens/game_screen.cpp"

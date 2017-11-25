@@ -3,20 +3,22 @@
 #include "driver.h"
 #include "screenManager.h"
 
-#define MILLISPERCYCLE    50           /* 50 is milliseconds */
+#define MILLIS_PER_CYCLE    50           /* 50 is milliseconds */
 
 int main() {
     init();             // begin arduino stuff
     Serial.begin(9600); // start serial moniter
 
 
-    ScreenManager *screens = new ScreenManager(MILLISPERCYCLE);                               // screen manager manages which screen to display
+    ScreenManager *screens = new ScreenManager(MILLIS_PER_CYCLE);                               // screen manager manages which screen to display
     screens->setScreen(new GameScreen(new StayingAlive_Driver(), new StayingAlive_Driver())); //set the starting screen
 
     // main game loop
     while (true) {
         screens->manageScreen(); // tells screen to update
     }
+
+    delete screens;
 
     Serial.flush();
     Serial.end();

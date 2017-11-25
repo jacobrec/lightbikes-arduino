@@ -120,3 +120,15 @@ void Bike_t::drive(Grid_t *grid) {
 void Driver_t::setBike(Bike_t *bike) { // this sets the reference to the bike, this could have been part of the constructor, but the drivers are created before the bike
     this->myBike = bike;
 }
+
+Bike_t::~Bike_t() {
+    delete this->driver;
+}
+Grid_t::~Grid_t() {
+    delete this->tiles;
+    delete this->bike1;
+    delete this->bike2;
+}
+Driver_t::~Driver_t() {
+    // has a pointer to myBike, but the deleting of that is handled in the destructor of grid_t
+}
