@@ -34,3 +34,4 @@ public:
 };
 
 #include "screens/game_screen.h"
+#include "screens/main_menu_screen.h"

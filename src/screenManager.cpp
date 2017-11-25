@@ -49,3 +49,4 @@ ScreenManager::~ScreenManager() {
 }
 
 #include "screens/game_screen.cpp"
+#include "screens/main_menu_screen.cpp"

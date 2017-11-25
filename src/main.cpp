@@ -1,6 +1,5 @@
 #include <Arduino.h>
 
-#include "driver.h"
 #include "screenManager.h"
 
 #define MILLIS_PER_CYCLE    50           /* 50 is milliseconds */
@@ -11,7 +10,7 @@ int main() {
 
 
     ScreenManager *screens = new ScreenManager(MILLIS_PER_CYCLE);                               // screen manager manages which screen to display
-    screens->setScreen(new GameScreen(new StayingAlive_Driver(), new StayingAlive_Driver())); //set the starting screen
+    screens->setScreen(new MainMenuScreen()); //set the starting screen
 
     // main game loop
     while (true) {
