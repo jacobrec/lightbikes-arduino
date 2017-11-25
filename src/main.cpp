@@ -11,9 +11,12 @@ int main() {
     init();             // begin arduino stuff
     Serial.begin(9600); // start serial moniter
 
+
     //setup game
-    Grid_t *grid       = initWorld(64, 48); // create a new grid, the central world object of size 64x48
-    long    frameCount = 0;                 // initialize the framecount variable, this is used to get a constant framerate
+    Grid_t *grid = initWorld(64, 48);            // create a new grid, the central world object of size 64x48
+    setUpGraphics(grid);                         // initializes the graphics system, as well as draws boarder
+    long frameCount = millis() / millisPerCycle; // initialize the framecount variable, this is used to get a constant framerate
+
 
     // main game loop
     while (true) {

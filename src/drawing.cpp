@@ -12,25 +12,32 @@
 
 Adafruit_ILI9341 tft = Adafruit_ILI9341(TFT_CS, TFT_DC);
 
-bool isSetup = false; // one time flag to see if setup should run
 
 
-
-void setup(Grid_t *grid) {
+void setUpGraphics(Grid_t *grid) {
+    // set up for tft
     tft.begin();
     tft.setRotation(3);
     tft.setTextSize(5);
     tft.fillScreen(ILI9341_BLACK);
 
-    isSetup = true;
+    // these loops draws the inital board state
     for (int x = 0; x < grid->width; x++) {
         for (int y = 0; y < grid->height; y++) {
             if (grid->getTile(x, y) == 0b01) {
-                drawRect(x, y, ILI9341_GREEN);// draw border
-            }else if (grid->getTile(x, y) == 0b11) {
-                drawRect(x, y, ILI9341_RED); // draw player1's first wall
-            }else if (grid->getTile(x, y) == 0b10) {
-                drawRect(x, y, ILI9341_BLUE);// draw player2's first wall
+                drawRect(x, y, ILI9341_GREEN); // draw border
+            }
+            else if (grid->getTile(x, y) == 0b11) {
+                drawRect(x, y, ILI9341_BLUE); // draw player1's starting walls if any
+            }
+            else if (grid->getTile(x, y) == 0b10) {
+                drawRect(x, y, ILI9341_RED); // draw player2's starting walls if any
+            }
+            else if (x == grid->bike1->x && y == grid->bike1->y) {
+                drawRect(x, y, ILI9341_BLUE); // draw player1's first wall
+            }
+            else if (x == grid->bike2->x && y == grid->bike2->y) {
+                drawRect(x, y, ILI9341_RED); // draw player2's first wall
             }
         }
     }
@@ -56,11 +63,6 @@ void ifGameOverDraw(Grid_t *grid) {
 }
 
 void render(Grid_t *grid) {
-    if (!isSetup) {
-        setup(grid);
-    }
-
-
     drawRect(grid->bike1->x, grid->bike1->y, ILI9341_BLUE);
     drawRect(grid->bike2->x, grid->bike2->y, ILI9341_RED);
 
