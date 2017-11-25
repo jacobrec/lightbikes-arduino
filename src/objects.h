@@ -57,7 +57,7 @@ protected:
     Bike_t *myBike;
 public:
 
-    ~Driver_t();
+    virtual ~Driver_t();
 
     void setBike(Bike_t *bike);
 

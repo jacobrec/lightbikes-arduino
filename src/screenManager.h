@@ -16,6 +16,7 @@ public:
     void setManager(ScreenManager *sm);
     virtual void frame();
     void changeScreen(Screen *screen);
+    virtual ~Screen(){};
 };
 
 
