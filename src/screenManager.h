@@ -1,3 +1,6 @@
+#ifndef SCREENMANAGER_H
+#define SCREENMANAGER_H
+
 #include <Arduino.h>
 
 #include "driver.h"
@@ -16,7 +19,9 @@ public:
     void setManager(ScreenManager *sm);
     virtual void frame();
     void changeScreen(Screen *screen);
-    virtual ~Screen(){};
+
+    virtual ~Screen() {
+    };
 };
 
 
@@ -36,3 +41,5 @@ public:
 
 #include "screens/game_screen.h"
 #include "screens/main_menu_screen.h"
+
+#endif
