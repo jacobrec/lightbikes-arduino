@@ -31,8 +31,7 @@ void setup(Grid_t *grid) {
     }
 }
 
-void ifGameOverDraw(Grid_t *grid){
-
+void ifGameOverDraw(Grid_t *grid) {
 }
 
 void render(Grid_t *grid) {
@@ -47,6 +46,7 @@ void render(Grid_t *grid) {
     ifGameOverDraw(grid);
 }
 
+// A convinence method
 void drawRect(int x, int y, uint16_t colour) {
     tft.fillRect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE, colour);
 }
