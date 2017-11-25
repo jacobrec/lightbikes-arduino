@@ -11,6 +11,7 @@ void Screen::changeScreen(Screen *screen) {
 ScreenManager::ScreenManager(int millisPerFrame) {
     this->frameCount     = 0;
     this->millisPerFrame = millisPerFrame;
+    this->currentScreen  = NULL;
 }
 
 void ScreenManager::manageScreen() {
@@ -35,6 +36,8 @@ void ScreenManager::ensureFrameRate() {
 
 void ScreenManager::setScreen(Screen *screen) {
     screen->setManager(this);
+
+    delete this->currentScreen;
 
     this->currentScreen = screen;
     this->frameCount = millis() / millisPerFrame; // initialize the framecount variable, this is used to get a constant framerate
