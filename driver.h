@@ -2,15 +2,13 @@
 #define _DRIVER_H_
 #include "objects.h"
 
-class StayingAlive_Driver : public Driver_t{
-public:
-    Turn_t steer(Grid_t *grid);
-};
 
-class UserL_Driver : public Driver_t{
-public:
-    Turn_t steer(Grid_t *grid);
-};
+// This file is only to be used to include headers from the driver folder
+#include "drivers/staying_alive_ai.h"
+#include "drivers/leftside_user.h"
+
+
+
 
 
 #endif
