@@ -19,19 +19,40 @@ bool isSetup = false; // one time flag to see if setup should run
 void setup(Grid_t *grid) {
     tft.begin();
     tft.setRotation(3);
+    tft.setTextSize(5);
     tft.fillScreen(ILI9341_BLACK);
 
     isSetup = true;
     for (int x = 0; x < grid->width; x++) {
         for (int y = 0; y < grid->height; y++) {
             if (grid->getTile(x, y) == 0b01) {
-                drawRect(x, y, ILI9341_GREEN);
+                drawRect(x, y, ILI9341_GREEN);// draw border
+            }else if (grid->getTile(x, y) == 0b11) {
+                drawRect(x, y, ILI9341_RED); // draw player1's first wall
+            }else if (grid->getTile(x, y) == 0b10) {
+                drawRect(x, y, ILI9341_BLUE);// draw player2's first wall
             }
         }
     }
 }
 
 void ifGameOverDraw(Grid_t *grid) {
+    tft.setCursor(70, 60); // these numbers were carefully selected through trial and error
+
+    if (!grid->bike2->isAlive && !grid->bike1->isAlive) {
+        tft.println("Draw :("); // sad face is so all three messages have the same number of charectors
+    }
+    else if (!grid->bike2->isAlive) {
+        tft.println("P1 Wins");
+    }
+    else if (!grid->bike1->isAlive) {
+        tft.println("P2 Wins");
+    }
+    else{
+        return;
+    }
+    tft.setCursor(20, 10); // these numbers were carefully selected through trial and error
+    tft.println("Game over!");
 }
 
 void render(Grid_t *grid) {
