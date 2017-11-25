@@ -31,6 +31,10 @@ void setup(Grid_t *grid) {
     }
 }
 
+void ifGameOverDraw(Grid_t *grid){
+
+}
+
 void render(Grid_t *grid) {
     if (!isSetup) {
         setup(grid);
@@ -39,6 +43,8 @@ void render(Grid_t *grid) {
 
     drawRect(grid->bike1->x, grid->bike1->y, ILI9341_BLUE);
     drawRect(grid->bike2->x, grid->bike2->y, ILI9341_RED);
+
+    ifGameOverDraw(grid);
 }
 
 void drawRect(int x, int y, uint16_t colour) {
