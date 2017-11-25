@@ -9,8 +9,11 @@ int main() {
     Serial.begin(9600); // start serial moniter
 
 
-    ScreenManager *screens = new ScreenManager(MILLIS_PER_CYCLE);                               // screen manager manages which screen to display
-    screens->setScreen(new MainMenuScreen()); //set the starting screen
+    setUpGraphics();                     // initializes the graphics system, as well as draws boarder
+
+
+    ScreenManager *screens = new ScreenManager(MILLIS_PER_CYCLE); // screen manager manages which screen to display
+    screens->setScreen(new MainMenuScreen());                     //set the starting screen
 
     // main game loop
     while (true) {

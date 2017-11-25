@@ -14,13 +14,16 @@ Adafruit_ILI9341 tft = Adafruit_ILI9341(TFT_CS, TFT_DC);
 
 
 
-void setUpGraphics(Grid_t *grid) {
+void setUpGraphics() {
     // set up for tft
     tft.begin();
     tft.setRotation(3);
     tft.setTextSize(5);
-    tft.fillScreen(ILI9341_BLACK);
 
+}
+
+void drawGrid(Grid_t *grid) {
+    tft.fillScreen(ILI9341_BLACK);
     // these loops draws the inital board state
     for (int x = 0; x < grid->width; x++) {
         for (int y = 0; y < grid->height; y++) {
