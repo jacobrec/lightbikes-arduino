@@ -1,4 +1,4 @@
-build-mega2560/main.o: main.cpp objects.h game.h drawing.h \
+build-mega2560/main.o: main.cpp \
  /usr/share/arduino/hardware/arduino//cores/arduino/Arduino.h \
  /usr/share/arduino/hardware/arduino//cores/arduino/binary.h \
  /usr/share/arduino/hardware/arduino//cores/arduino/WCharacter.h \
@@ -8,4 +8,5 @@ build-mega2560/main.o: main.cpp objects.h game.h drawing.h \
  /usr/share/arduino/hardware/arduino//cores/arduino/Print.h \
  /usr/share/arduino/hardware/arduino//cores/arduino/Printable.h \
  /usr/share/arduino/hardware/arduino//cores/arduino/new.h \
- /usr/share/arduino/hardware/arduino//variants/mega/pins_arduino.h
+ /usr/share/arduino/hardware/arduino//variants/mega/pins_arduino.h \
+ objects.h game.h drawing.h

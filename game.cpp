@@ -1,8 +1,8 @@
 #include "game.h"
 #include "driver.h"
 
-Grid_t *initWorld() {// returns a new grid with a width of 36, a height of 28 and sets the two drivers to be StayingAlive_Driver
-    return(new Grid_t(36, 28, new StayingAlive_Driver(), new StayingAlive_Driver()));
+Grid_t *initWorld(int width, int height) {// returns a new grid with a width of 36, a height of 28 and sets the two drivers to be StayingAlive_Driver
+    return(new Grid_t(width, height, new StayingAlive_Driver(), new StayingAlive_Driver()));
 }
 
 void update(Grid_t *grid) {

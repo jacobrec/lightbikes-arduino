@@ -8,6 +8,6 @@ void update(Grid_t* grid);
 void addWall(Bike_t* bike, Grid_t* grid);
 void checkCollision(Bike_t* bike, Grid_t* grid);
 
-Grid_t* initWorld();
+Grid_t* initWorld(int width, int height);
 
 #endif
