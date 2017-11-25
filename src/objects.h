@@ -28,7 +28,6 @@ public:
     Bike_t *bike2;
 
     bool isGamePlaying;
-
 };
 
 
@@ -44,7 +43,7 @@ public:
     int         x;
     int         y;
     int         id;
-    bool isAlive;
+    bool        isAlive;
     Direction_t currentDirection;
 };
 
@@ -55,7 +54,7 @@ protected:
 public:
     void setBike(Bike_t *bike);
 
-    virtual Turn_t steer(Grid_t *grid) {// this method is to be extended to form the differnt behaviors of the driver types
+    virtual Turn_t steer(Grid_t *grid) { // this method is to be extended to form the differnt behaviors of the driver types
         return(STRAIGHT);
     }
 };
