@@ -26,24 +26,5 @@ Direction_t getJoystickDirection(Direction_t current) {
 }
 
 Turn_t UserL_Driver::steer(Grid_t *grid) {
-    // determine the direction to turn by subracting the  joystick direction from the currentDirection
-    // in most legal moves it will be 1 or zero, unless the currentDirection and joystick direction are north and west in which case it will be +-3
-    int turn = (getJoystickDirection(this->myBike->currentDirection) - this->myBike->currentDirection);
-
-    // if its magnitude is 3, then it is a legal move, and needs to be converted to the correct turn, a 1 or -1
-    // this only occurs when traveling north or west, and turning west or north
-    if (abs(turn) == 3) {
-        turn /= -3;
-    }
-
-
-    switch (turn) { // if the turn is not 0 or 2, it is a left or right turn and return that.
-        case RIGHT: // turn is 1
-            return(RIGHT);
-
-        case LEFT: // turn is -1
-            return(LEFT);
-    }
-    // otherwise if it is 0 or 2, either theyre turning straight, so return that. Or, they are trying to turn backwards, whcih is illegal, so also return straight
-    return(STRAIGHT);
+    return(getTurn(getJoystickDirection(this->myBike->getDirection()), this->myBike->getDirection()));
 }

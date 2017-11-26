@@ -1,4 +1,4 @@
-Turn_t StayingAlive_Driver::steer(Grid_t *grid) {
+Turn_t StayingAlive_Driver::getNearSafeDirection(Grid_t *grid, Direction_t dir) {
     bool isNorthSafe;
     bool isSouthSafe;
     bool isEastSafe;
@@ -13,9 +13,8 @@ Turn_t StayingAlive_Driver::steer(Grid_t *grid) {
     isEastSafe  = (grid->getTile(x + 1, y) == 0b00);
     isWestSafe  = (grid->getTile(x - 1, y) == 0b00);
 
-
     // check if straight is safe, if it is, return straight
-    switch (this->myBike->currentDirection) {
+    switch (dir) {
         case NORTH:
             if (isNorthSafe) {
                 return(STRAIGHT);
@@ -42,7 +41,7 @@ Turn_t StayingAlive_Driver::steer(Grid_t *grid) {
     }
 
     // check if right is safe, if it is, return right
-    switch (this->myBike->currentDirection) {
+    switch (dir) {
         case NORTH:
             if (isEastSafe) {
                 return(RIGHT);
@@ -69,7 +68,7 @@ Turn_t StayingAlive_Driver::steer(Grid_t *grid) {
     }
 
     // check if left is safe, if it is, return left
-    switch (this->myBike->currentDirection) {
+    switch (dir) {
         case NORTH:
             if (isWestSafe) {
                 return(LEFT);
@@ -94,7 +93,10 @@ Turn_t StayingAlive_Driver::steer(Grid_t *grid) {
             }
             break;
     }
-
     // if nothing is safe, go straight and accept death
     return(STRAIGHT);
+}
+
+Turn_t StayingAlive_Driver::steer(Grid_t *grid) {
+    return(getNearSafeDirection(grid, this->myBike->getDirection()));
 }

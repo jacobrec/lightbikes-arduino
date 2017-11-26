@@ -36,19 +36,21 @@ public:
 
 class Bike_t {
 private:
-    Driver_t *driver; // the driver of a bike is what determines it's steering behavior, like whether it's an A.I. or player
-
+    Driver_t *  driver; // the driver of a bike is what determines it's steering behavior, like whether it's an A.I. or player
+    Direction_t currentDirection;
 public:
     Bike_t(int x, int y, int id, Direction_t, Driver_t *);
     ~Bike_t();
 
     void drive(Grid_t *grid);
 
-    int         x;
-    int         y;
-    int         id;
-    bool        isAlive;
-    Direction_t currentDirection;
+    int  x;
+    int  y;
+    int  id;
+    bool isAlive;
+    Direction_t getDirection() {
+        return(this->currentDirection);
+    }
 };
 
 // this class is extended to get the different driver types, both player and A.I. ones
