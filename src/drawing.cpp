@@ -35,10 +35,10 @@ void drawGrid(Grid_t *grid) {
             else if (grid->getTile(x, y) == 0b10) {
                 drawRect(x, y, ILI9341_RED); // draw player2's starting walls if any
             }
-            else if (x == grid->bike1->x && y == grid->bike1->y) {
+            else if (x == grid->bike1->getX() && y == grid->bike1->getY()) {
                 drawRect(x, y, ILI9341_BLUE); // draw player1's first wall
             }
-            else if (x == grid->bike2->x && y == grid->bike2->y) {
+            else if (x == grid->bike2->getX() && y == grid->bike2->getY()) {
                 drawRect(x, y, ILI9341_RED); // draw player2's first wall
             }
         }
@@ -48,13 +48,13 @@ void drawGrid(Grid_t *grid) {
 void ifGameOverDraw(Grid_t *grid) {
     tft.setCursor(70, 60); // these numbers were carefully selected through trial and error
 
-    if (!grid->bike2->isAlive && !grid->bike1->isAlive) {
+    if (!grid->bike2->getAlive() && !grid->bike1->getAlive()) {
         tft.println("Draw :("); // sad face is so all three messages have the same number of charectors
     }
-    else if (!grid->bike2->isAlive) {
+    else if (!grid->bike2->getAlive()) {
         tft.println("P1 Wins");
     }
-    else if (!grid->bike1->isAlive) {
+    else if (!grid->bike1->getAlive()) {
         tft.println("P2 Wins");
     }
     else{
@@ -65,8 +65,8 @@ void ifGameOverDraw(Grid_t *grid) {
 }
 
 void render(Grid_t *grid) {
-    drawRect(grid->bike1->x, grid->bike1->y, ILI9341_BLUE);
-    drawRect(grid->bike2->x, grid->bike2->y, ILI9341_RED);
+    drawRect(grid->bike1->getX(), grid->bike1->getY(), ILI9341_BLUE);
+    drawRect(grid->bike2->getX(), grid->bike2->getY(), ILI9341_RED);
 
     ifGameOverDraw(grid);
 }

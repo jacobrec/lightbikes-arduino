@@ -4,8 +4,8 @@ Turn_t StayingAlive_Driver::getNearSafeDirection(Grid_t *grid, Direction_t dir) 
     bool isEastSafe;
     bool isWestSafe;
 
-    int x = this->myBike->x;
-    int y = this->myBike->y;
+    int x = this->myBike->getX();
+    int y = this->myBike->getY();
 
     // checks the tiles around it to see what direction is safe
     isNorthSafe = (grid->getTile(x, y + 1) == 0b00);

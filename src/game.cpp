@@ -7,7 +7,7 @@ Grid_t *initWorld(int width, int height, Driver_t *d1, Driver_t *d2) { // return
 }
 
 void update(Grid_t *grid) {
-    grid->isGamePlaying = (grid->bike1->isAlive && grid->bike2->isAlive);
+    grid->isGamePlaying = (grid->bike1->getAlive() && grid->bike2->getAlive());
 
     // the update method first adds a wall in the bikes current locations, then moves the bike, then checks to see if the bike hit anything
     // this order is so there is no advantage to being either player, for example in a head on collision, players will now both die instead of just one
@@ -24,7 +24,7 @@ void update(Grid_t *grid) {
 }
 
 void addWall(Bike_t *bike, Grid_t *grid) { // this leaves a trail of the wall behind it as it travels
-    grid->makeWall(bike->x, bike->y, bike->id);
+    grid->makeWall(bike->getX(), bike->getY(), bike->getID());
 }
 
 void checkCollision(Bike_t *bike, Grid_t *grid) {

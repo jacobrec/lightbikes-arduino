@@ -38,16 +38,34 @@ class Bike_t {
 private:
     Driver_t *  driver; // the driver of a bike is what determines it's steering behavior, like whether it's an A.I. or player
     Direction_t currentDirection;
+    int         x;
+    int         y;
+    int         id;
+    bool        isAlive;
 public:
     Bike_t(int x, int y, int id, Direction_t, Driver_t *);
     ~Bike_t();
 
     void drive(Grid_t *grid);
 
-    int  x;
-    int  y;
-    int  id;
-    bool isAlive;
+    int getX() {
+        return(this->x);
+    }
+
+    int getY() {
+        return(this->y);
+    }
+
+    int getAlive() {
+        return(this->isAlive);
+    }
+
+    int getID() {
+        return(this->id);
+    }
+
+    friend void checkCollision(Bike_t *bike, Grid_t *grid);
+
     Direction_t getDirection() {
         return(this->currentDirection);
     }
