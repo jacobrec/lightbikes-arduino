@@ -2,7 +2,7 @@
 #define _OBJECTS_H_
 
 // define directional enums, the values are set for easy turning, see void Bike_t::drive(Grid_t *grid) in objects.cpp for example
-enum Direction_t { NORTH = 0, EAST, SOUTH, WEST };
+enum Direction_t { NORTH = 0, EAST = 1, SOUTH = 2, WEST = 3 };
 enum Turn_t { LEFT = -1, RIGHT = 1, STRAIGHT = 0 };
 
 

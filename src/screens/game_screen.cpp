@@ -9,7 +9,7 @@ void GameScreen::frame() {
     render(this->grid);            // renders the world
 
     if(!this->grid->isGamePlaying){// if it's game over, wait a bit then return to the menu
-        delay(1000 * 5);// 5 seconds
+        delay(1000 * 2);// 5 seconds
         this->changeScreen(new MainMenuScreen());
     }
 }
