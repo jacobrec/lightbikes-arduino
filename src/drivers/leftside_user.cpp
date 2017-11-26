@@ -31,6 +31,7 @@ Turn_t UserL_Driver::steer(Grid_t *grid) {
     int turn = (getJoystickDirection(this->myBike->currentDirection) - this->myBike->currentDirection);
 
     // if its magnitude is 3, then it is a legal move, and needs to be converted to the correct turn, a 1 or -1
+    // this only occurs when traveling north or west, and turning west or north
     if (abs(turn) == 3) {
         turn /= -3;
     }

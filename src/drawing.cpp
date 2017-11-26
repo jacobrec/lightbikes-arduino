@@ -19,7 +19,6 @@ void setUpGraphics() {
     tft.begin();
     tft.setRotation(3);
     tft.setTextSize(5);
-
 }
 
 void drawGrid(Grid_t *grid) {

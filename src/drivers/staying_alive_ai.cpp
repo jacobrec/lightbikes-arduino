@@ -1,4 +1,3 @@
-
 Turn_t StayingAlive_Driver::steer(Grid_t *grid) {
     bool isNorthSafe;
     bool isSouthSafe;
