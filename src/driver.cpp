@@ -27,6 +27,7 @@ Turn_t getTurn(Direction_t to, Direction_t from){
 
 
 // This file is only to be used to include the drivers from the drivers folder
+// <DRIVERS>
 #include "drivers/staying_alive_ai.cpp"
 #include "drivers/leftside_user.cpp"
 #include "drivers/stalker_ai.cpp"
