@@ -31,6 +31,7 @@ Turn_t getTurn(Direction_t to, Direction_t from){
 #include "drivers/staying_alive_ai.cpp"
 #include "drivers/leftside_user.cpp"
 #include "drivers/stalker_ai.cpp"
+#include "drivers/runner_ai.cpp"
 
 
 // this is done too keep the project organized, we wanted to keep all the drivers in one sub folder, but
