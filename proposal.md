@@ -23,8 +23,8 @@ Player control is done by using the joystick
 
 Can choose color at beginning of game
 
-#### A.I. ideas 
-For the A.I. we would like to implement several different stratagies, 
+#### A.I. ideas
+For the A.I. we would like to implement several different stratagies,
 these are some of our initial thoughts on A.I. strategies and all likely will not make it into the final implementation.
 
 
@@ -57,9 +57,9 @@ Voronoi Diagram would be calculated using Dijkstra's or A* algorithm.
 If too slow with all the searching on every point, use a Monte Carlo approximation.
 
 ## Milestone goals
-- [ ] Have a working two player light bike game
+- [x] Have a working two player light bike game
 - [ ] Create a basic title screen
-- [ ] Create a basic A.I. player for 1 player mode
+- [x] Create a basic A.I. player for 1 player mode
 - [ ] Create player color selection system
 - [ ] Create a title screen with A.I. players competing
 - [ ] Create a more advanced A.I. (new A.I. or variable difficulty for basic A.I.)
