@@ -8,6 +8,15 @@ navigate to the src folder
 
     make upload
 
+## A.I. in the game
+Currently 3 A.I. listed in terms of difficulty, easiest is at top
+- staying_alive_ai
+- stalker_ai
+- runner_ai
+
+this is according to my opinion after plalying them
+
+
 
 A.I. stratagy articles:
 - https://web.stanford.edu/~jbboin/doc/ai_lightcycle.pdf
