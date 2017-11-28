@@ -36,8 +36,7 @@ void Stalker_Driver::swap(int *a, int *b) {
 void Stalker_Driver::parallelSort(int *comparer, int *latched, int size) {
     int i, j;
 
-    for (i = 0; i < size - 1; i++) {
-        // Last i elements are already in place
+    for (i = 0; i < size - 1; i++) { // bubble sort as there is only three elements ever
         for (j = 0; j < size - i - 1; j++) {
             if (comparer[j] > comparer[j + 1]) {
                 swap(&comparer[j], &comparer[j + 1]);
