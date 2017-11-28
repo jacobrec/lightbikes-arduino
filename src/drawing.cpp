@@ -26,20 +26,8 @@ void drawGrid(Grid_t *grid) {
     // these loops draws the inital board state
     for (int x = 0; x < grid->width; x++) {
         for (int y = 0; y < grid->height; y++) {
-            if (grid->getTile(x, y) == 0b01) {
+            if (grid->getTile(x, y) == 1) {
                 drawRect(x, y, ILI9341_GREEN); // draw border
-            }
-            else if (grid->getTile(x, y) == 0b11) {
-                drawRect(x, y, ILI9341_BLUE); // draw player1's starting walls if any
-            }
-            else if (grid->getTile(x, y) == 0b10) {
-                drawRect(x, y, ILI9341_RED); // draw player2's starting walls if any
-            }
-            else if (x == grid->bike1->getX() && y == grid->bike1->getY()) {
-                drawRect(x, y, ILI9341_BLUE); // draw player1's first wall
-            }
-            else if (x == grid->bike2->getX() && y == grid->bike2->getY()) {
-                drawRect(x, y, ILI9341_RED); // draw player2's first wall
             }
         }
     }
