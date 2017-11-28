@@ -21,12 +21,12 @@ Direction_t Joystick_Driver::getJoystickDirection(Direction_t current) {
 
 
     if (abs(y_joy) > abs(x_joy)) {             // if the y axis is pushed more then the x axis
-        if (abs(y_joy) > ANALOG_IN_SIZE / 2) { // return north or south depending on the direction the jotsyick is pressed
+        if (abs(y_joy) > ANALOG_IN_SIZE / 4) { // return north or south depending on the direction the jotsyick is pressed
             return((y_joy > 0) ? NORTH : SOUTH);
         }
     }
     else if (abs(x_joy) > abs(y_joy)) {        // if the x axis is pushed more then the y axis
-        if (abs(x_joy) > ANALOG_IN_SIZE / 2) { // return east or west depending on the direction the jotsyick is pressed
+        if (abs(x_joy) > ANALOG_IN_SIZE / 4) { // return east or west depending on the direction the jotsyick is pressed
             return((x_joy < 0) ? WEST : EAST);
         }
     }

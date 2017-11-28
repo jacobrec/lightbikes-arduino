@@ -1,5 +1,7 @@
 #include "screenManager.h"
 
+extern Adafruit_ILI9341 tft;
+
 void Screen::setManager(ScreenManager *sm) {
     this->sm = sm;
 }

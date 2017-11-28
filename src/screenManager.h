@@ -2,6 +2,8 @@
 #define SCREENMANAGER_H
 
 #include <Arduino.h>
+#include <Adafruit_GFX.h>
+#include <Adafruit_ILI9341.h>
 
 #include "driver.h"
 #include "drawing.h"
