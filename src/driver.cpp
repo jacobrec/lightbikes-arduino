@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include "driver.h"
 #include "objects.h"
+#include "util.h"
 
 // useful functions that all drivers might want to use
 Turn_t getTurn(Direction_t to, Direction_t from){
