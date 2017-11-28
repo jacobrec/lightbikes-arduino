@@ -15,14 +15,14 @@ class Driver_t;
 // Grid holds the tiles and bikes, as well as some other data about the arena
 class Grid_t {
 private:
-    Tile *tiles; // tiles are stored with 4 tiles per byte. tiles[0] holds the 4 tiles that are in the top left corner in a square formation, this is to save space on the arduinos limited memory
+    Tile *tiles; // tiles are stored with 8 tiles per byte. tiles[0] holds the 8 tiles that are in the top left corner in a rectangle formation, this is to save space on the arduinos limited memory
 public:
-    // height and width must be divisible by 2 due to the encoding, this encoding however uses 25% of the memory it would otherwise use
+    // height and width/2 must be divisible by 2 due to the encoding, this encoding however uses 25% of the memory it would otherwise use
     Grid_t(int height, int width, Driver_t *d1, Driver_t *d2);
     ~Grid_t();
 
     Tile getTile(int x, int y);
-    void makeWall(int x, int y, int playerNumber);
+    void makeWall(int x, int y);
 
     int     height;
     int     width;
