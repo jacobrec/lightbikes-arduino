@@ -19,14 +19,15 @@ Direction_t Joystick_Driver::getJoystickDirection(Direction_t current) {
     int y_joy = map(analogRead(this->pinY), 0, ANALOG_IN_SIZE, -ANALOG_IN_SIZE, ANALOG_IN_SIZE);
     int x_joy = map(analogRead(this->pinX), 0, ANALOG_IN_SIZE, -ANALOG_IN_SIZE, ANALOG_IN_SIZE);
 
+    SerialPrintf("X: %d, Y: %d\n\r", analogRead(this->pinX), analogRead(this->pinY));
 
     if (abs(y_joy) > abs(x_joy)) {             // if the y axis is pushed more then the x axis
-        if (abs(y_joy) > ANALOG_IN_SIZE / 4) { // return north or south depending on the direction the jotsyick is pressed
+        if (abs(y_joy) > ANALOG_IN_SIZE / 2) { // return north or south depending on the direction the jotsyick is pressed
             return((y_joy > 0) ? NORTH : SOUTH);
         }
     }
     else if (abs(x_joy) > abs(y_joy)) {        // if the x axis is pushed more then the y axis
-        if (abs(x_joy) > ANALOG_IN_SIZE / 4) { // return east or west depending on the direction the jotsyick is pressed
+        if (abs(x_joy) > ANALOG_IN_SIZE / 2) { // return east or west depending on the direction the jotsyick is pressed
             return((x_joy < 0) ? WEST : EAST);
         }
     }
@@ -40,9 +41,9 @@ Turn_t Joystick_Driver::steer(Grid_t *grid) {
 
 
 Joystick_Driver *createUserR_Driver() {
-    return(new Joystick_Driver(RIGHT_JOY_VERT, RIGHT_JOY_HORIZ));
+    return(new Joystick_Driver(RIGHT_JOY_HORIZ, RIGHT_JOY_VERT));
 }
 
 Joystick_Driver *createUserL_Driver() {
-    return(new Joystick_Driver(LEFT_JOY_VERT, LEFT_JOY_HORIZ));
+    return(new Joystick_Driver(LEFT_JOY_HORIZ, LEFT_JOY_VERT));
 }
