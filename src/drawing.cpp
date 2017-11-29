@@ -40,21 +40,21 @@ void ifGameOverDraw(Grid_t *grid) {
         tft.println(F("Draw :(")); // sad face is so all three messages have the same number of charectors
     }
     else if (!grid->bike2->getAlive()) {
-        tft.println(F("P1 Wins"));// F() to save on ram
+        tft.println(F("P1 Wins")); // F() to save on ram
     }
     else if (!grid->bike1->getAlive()) {
-        tft.println(F("P2 Wins"));// F() to save on ram
+        tft.println(F("P2 Wins")); // F() to save on ram
     }
     else{
         return;
     }
     tft.setCursor(20, 10); // these numbers were carefully selected through trial and error
-    tft.println("Game over!");
+    tft.println(F("Game over!"));
 }
 
 void render(Grid_t *grid) {
-    drawRect(grid->bike1->getX(), grid->bike1->getY(), ILI9341_BLUE);
-    drawRect(grid->bike2->getX(), grid->bike2->getY(), ILI9341_RED);
+    drawRect(grid->bike1->getX(), grid->bike1->getY(), grid->bike1->getColour());
+    drawRect(grid->bike2->getX(), grid->bike2->getY(), grid->bike2->getColour());
 
     ifGameOverDraw(grid);
 }
@@ -64,32 +64,29 @@ void drawRect(int x, int y, uint16_t colour) {
     tft.fillRect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE, colour);
 }
 
-void generateMenuScreen(char* textCap)
-{
+void generateMenuScreen(char *textCap) {
     tft.setTextSize(2);
-	tft.drawLine(0, 40, 320, 40, ILI9341_WHITE);
-	tft.drawLine(0, 200, 320, 200, ILI9341_WHITE);
-	tft.drawLine(160, 40, 160, 240, ILI9341_WHITE);
-	tft.drawLine(161, 40,161, 240, ILI9341_WHITE);
-	tft.setCursor(50, 5);
-	tft.println(textCap);
-	tft.setCursor(50, 215);
-	tft.println("Back");
-	tft.setCursor(210, 215);
-	tft.println("Start");
+    tft.drawLine(0, 40, 320, 40, ILI9341_WHITE);
+    tft.drawLine(0, 200, 320, 200, ILI9341_WHITE);
+    tft.drawLine(160, 40, 160, 240, ILI9341_WHITE);
+    tft.drawLine(161, 40, 161, 240, ILI9341_WHITE);
+    tft.setCursor(50, 5);
+    tft.println(textCap);
+    tft.setCursor(50, 215);
+    tft.println(F("Back"));
+    tft.setCursor(210, 215);
+    tft.println(F("Start"));
 }
 
 void drawName(int index, const char driver[], int highlighted, int driverID) {
     // 15 is the vertical span of a size-2 character
     // (including the one pixel of padding below)
-	if (driverID == 1)
-	{
-		tft.setCursor(33, 20 * index + 50);
-	}
-	else
-	{
-		tft.setCursor(195, 20 * index + 50);
-	}
+    if (driverID == 1) {
+        tft.setCursor(33, 20 * index + 50);
+    }
+    else{
+        tft.setCursor(195, 20 * index + 50);
+    }
 
     //changes the highlighing of restaurants
     if (index == highlighted) {
@@ -100,4 +97,5 @@ void drawName(int index, const char driver[], int highlighted, int driverID) {
     }
 
     tft.println(driver);
+    tft.setTextColor(ILI9341_WHITE, ILI9341_BLACK);
 }
