@@ -66,15 +66,16 @@ void drawRect(int x, int y, uint16_t colour) {
 
 void generateMenuScreen(char* textCap)
 {
-	tft.drawLine(0, 20, 320, 20, ILI9341_WHITE);
-	tft.drawLine(0, 220, 320, 220, ILI9341_WHITE);
-	tft.drawLine(160, 20, 160, 240, ILI9341_WHITE);
-	tft.drawLine(161, 20,161, 240, ILI9341_WHITE);
-	tft.setCursor(150, 0);
+    tft.setTextSize(2);
+	tft.drawLine(0, 40, 320, 40, ILI9341_WHITE);
+	tft.drawLine(0, 200, 320, 200, ILI9341_WHITE);
+	tft.drawLine(160, 40, 160, 240, ILI9341_WHITE);
+	tft.drawLine(161, 40,161, 240, ILI9341_WHITE);
+	tft.setCursor(50, 5);
 	tft.println(textCap);
-	tft.setCursor(0, 225);
+	tft.setCursor(50, 215);
 	tft.println("Back");
-	tft.setCursor(300, 225);
+	tft.setCursor(210, 215);
 	tft.println("Start");
 }
 
@@ -83,11 +84,11 @@ void drawName(int index, const char driver[], int highlighted, int driverID) {
     // (including the one pixel of padding below)
 	if (driverID == 1)
 	{
-		tft.setCursor(0, 8 * index + 25);
+		tft.setCursor(33, 20 * index + 50);
 	}
 	else
 	{
-		tft.setCursor(162, 8 * index + 25);
+		tft.setCursor(195, 20 * index + 50);
 	}
 
     //changes the highlighing of restaurants
