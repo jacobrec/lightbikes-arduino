@@ -8,7 +8,7 @@
 
 #define DISPLAY_WIDTH     320
 #define DISPLAY_HEIGHT    240
-#define TILE_SIZE         5
+#define TILE_SIZE         10
 
 Adafruit_ILI9341 tft = Adafruit_ILI9341(TFT_CS, TFT_DC);
 

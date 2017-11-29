@@ -2,7 +2,7 @@
 
 #include "screenManager.h"
 
-#define MILLIS_PER_CYCLE    50           /* 50 is milliseconds */
+#define MILLIS_PER_CYCLE    150           /* in milliseconds */
 
 int main() {
     init();             // begin arduino stuff
