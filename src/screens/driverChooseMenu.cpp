@@ -14,7 +14,7 @@ const char *driverNames[5] = {
     "Smarter"
 };
 
-Driver_t DriverSelectScreen::getNewDriver(int mode) {
+Driver_t* DriverSelectScreen::getNewDriver(int mode) {
     int highlight;
 
     if (mode == 1) {
@@ -26,23 +26,23 @@ Driver_t DriverSelectScreen::getNewDriver(int mode) {
     switch (highlight) {
         case 0:
             if (mode == 1) {
-                return(Joystick_Driver(LEFT_JOY_HORIZ, LEFT_JOY_VERT));
+                return(createUserL_Driver());
             }
             else{
-                return(Joystick_Driver(RIGHT_JOY_HORIZ, RIGHT_JOY_VERT));
+                return(createUserR_Driver());
             }
 
         case 1:
-            return(Stalker_Driver());
+            return(new Stalker_Driver());
 
         case 2:
-            return(Runner_ai());
+            return(new Runner_ai());
 
         case 3:
-            return(StayingAlive_Driver());
+            return(new StayingAlive_Driver());
 
         case 4:
-            return(Possession_Driver());
+            return(new Possession_Driver());
     }
 }
 
@@ -83,9 +83,9 @@ void DriverSelectScreen::frame() {                        // this runs every fra
 
     if (p.z > 100) {                  //pressure detect
         if (p.x > 500 && p.y < 500) { //hitbox for start
-            Driver_t d1 = this->getNewDriver(1);
-            Driver_t d2 = this->getNewDriver(2);
-            this->changeScreen(new GameScreen(&d1, &d2));
+            Driver_t* d1 = this->getNewDriver(1);
+            Driver_t* d2 = this->getNewDriver(2);
+            this->changeScreen(new GameScreen(d1, d2));
             //this->changeScreen(new ColorSelectScreen();)
         }
         else if (p.x > 500 && p.y > 500) { //hitbox for back
