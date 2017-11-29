@@ -6,8 +6,8 @@ Grid_t::Grid_t(int w, int h, Driver_t *d1, Driver_t *d2, uint16_t colour1, uint1
     this->tiles  = new Tile[width * height / 4](); // divide by 4, as 4 tiles are encoded into one bytes
 
     // creates new bikes facing eachother at opposite ends of the arena and assignes the bikes to the drivers
-    this->bike1 = new Bike_t(width - 4, height / 2, 1, WEST, d1, colour1);
-    this->bike2 = new Bike_t(3, height / 2 - 1, 2, EAST, d2, colour2);
+    this->bike1 = new Bike_t(3, height / 2, 1, WEST, d1, colour1);
+    this->bike2 = new Bike_t(width - 4, height / 2 - 1, 2, EAST, d2, colour2);
     d1->setBike(this->bike1);
     d2->setBike(this->bike2);
 
