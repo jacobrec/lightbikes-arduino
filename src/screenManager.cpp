@@ -8,7 +8,7 @@
 #define ANALOG_IN_SIZE     1023
 
 TouchScreen touch_screen = TouchScreen(4, A2, A3, 5, 300);
-
+extern Adafruit_ILI9341 tft;
 
 void Screen::setManager(ScreenManager *sm) {
     this->sm = sm;
