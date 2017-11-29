@@ -48,7 +48,7 @@ void ifGameOverDraw(Grid_t *grid) {
     else{
         return;
     }
-    tft.setCursor(20, 10); // these numbers were carefully selected through trial and error
+    tft.setCursor(10, 10); // these numbers were carefully selected through trial and error
     tft.println(F("Game over!"));
 }
 
