@@ -65,7 +65,6 @@ void DriverSelectScreen::frame() {                        // this runs every fra
 
     highlightDriver1 = constrain(highlightDriver1 + joyControl(1), 0, 4); //keep values of highlight between 0 and 4;
     highlightDriver2 = constrain(highlightDriver2 + joyControl(2), 0, 4);
-	SerialPrintf("H1: %d, H2: %d, JC1: %d, JC2: %d\r\n",highlightDriver1, highlightDriver2, joyControl(1), joyControl(2));
 
     if (oH1 != highlightDriver1) {
         for (int i = 0; i < 5; i++) {
@@ -79,15 +78,17 @@ void DriverSelectScreen::frame() {                        // this runs every fra
     }
 
     TSPoint p = touch_screen.getPoint();
+	SerialPrintf("p.x: %d, p.y %d, p.z: %d\r\n",p.x,p.y,p.z);
 
-    if (p.z > 500) {                  //pressure detect
-        if (p.x > 170 && p.y > 220) { //hitbox for start
+
+    if (p.z > 100) {                  //pressure detect
+        if (p.x > 500 && p.y < 500) { //hitbox for start
             Driver_t d1 = this->getNewDriver(1);
             Driver_t d2 = this->getNewDriver(2);
             this->changeScreen(new GameScreen(&d1, &d2));
             //this->changeScreen(new ColorSelectScreen();)
         }
-        else if (p.x < 155 && p.y > 220) { //hitbox for back
+        else if (p.x > 500 && p.y > 500) { //hitbox for back
             this->changeScreen(new MainMenuScreen());
         }
     }
