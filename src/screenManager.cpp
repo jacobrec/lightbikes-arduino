@@ -57,25 +57,22 @@ ScreenManager::~ScreenManager() {
     delete this->currentScreen;
 }
 
-int joyControl(int driverID)
-{
+int joyControl(int driverID) {
     int y_joy;
-	if (driverID == 1) //determine which joystick controlling
-	{
-		int y_joy = map(analogRead(LEFT_JOY_VERT), 0, ANALOG_IN_SIZE, -ANALOG_IN_SIZE, ANALOG_IN_SIZE);
-	}
-	else
-	{
-		int y_joy = map(analogRead(RIGHT_JOY_VERT), 0, ANALOG_IN_SIZE, -ANALOG_IN_SIZE, ANALOG_IN_SIZE);
-	}
 
-	if (abs(y_joy) > ANALOG_IN_SIZE / 2) { // return north or south depending on the direction the jotsyick is pressed
-		return((y_joy > 0) ? 1 : -1);
-	}
-	else
-	{
-		return 0;
-	}
+    if (driverID == 1) { //determine which joystick controlling
+        int y_joy = map(analogRead(LEFT_JOY_VERT), 0, ANALOG_IN_SIZE, -ANALOG_IN_SIZE, ANALOG_IN_SIZE);
+    }
+    else{
+        int y_joy = map(analogRead(RIGHT_JOY_VERT), 0, ANALOG_IN_SIZE, -ANALOG_IN_SIZE, ANALOG_IN_SIZE);
+    }
+
+    if (abs(y_joy) > ANALOG_IN_SIZE / 2) { // return north or south depending on the direction the jotsyick is pressed
+        return((y_joy > 0) ? 1 : -1);
+    }
+    else{
+        return(0);
+    }
 }
 
 #include "screens/game_screen.cpp"
