@@ -1,7 +1,6 @@
 // IMPORTANT: this file is only to be included into drivers.h and nowhere else
 class Joystick_Driver : public Driver_t {
 private:
-
     uint8_t pinX; uint8_t pinY;
     Direction_t getJoystickDirection(Direction_t current);
 

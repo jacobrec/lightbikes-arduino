@@ -4,11 +4,14 @@
 #include <Arduino.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_ILI9341.h>
+#include <TouchScreen.h>
 
 #include "driver.h"
 #include "drawing.h"
 #include "objects.h"
 #include "game.h"
+
+TouchScreen ts = TouchScreen(4, A2, A3, 5, 300);
 
 
 class Screen;
@@ -41,7 +44,10 @@ public:
     void setScreen(Screen *screen);
 };
 
+int joyControl(int driverID);
+
 #include "screens/game_screen.h"
 #include "screens/main_menu_screen.h"
+#include "screens/driverChooseMenu.h"
 
 #endif
