@@ -1,13 +1,13 @@
 #include "objects.h"
 
-Grid_t::Grid_t(int w, int h, Driver_t *d1, Driver_t *d2) {
+Grid_t::Grid_t(int w, int h, Driver_t *d1, Driver_t *d2, uint16_t colour1, uint16_t colour2) {
     this->width  = w;
     this->height = h;
     this->tiles  = new Tile[width * height / 4](); // divide by 4, as 4 tiles are encoded into one bytes
 
     // creates new bikes facing eachother at opposite ends of the arena and assignes the bikes to the drivers
-    this->bike1 = new Bike_t(width - 4, height / 2, 1, WEST, d1);
-    this->bike2 = new Bike_t(3, height / 2 - 1, 2, EAST, d2);
+    this->bike1 = new Bike_t(width - 4, height / 2, 1, WEST, d1, colour1);
+    this->bike2 = new Bike_t(3, height / 2 - 1, 2, EAST, d2, colour2);
     d1->setBike(this->bike1);
     d2->setBike(this->bike2);
 
@@ -27,23 +27,25 @@ Tile Grid_t::getTile(int x, int y) {
     Tile out;
 
     // this switch statement determines which part of the datablock is selected by using the x and y
-    int blockNum = ((x % 4)) + ((y % 2)*4);
+    int blockNum = ((x % 4)) + ((y % 2) * 4);
+
     out = (tileBlock & (1 << blockNum)) >> blockNum;
 
     return(out & 0b1); // the & 0b1 is not nessecary, but it has a negligible speed differnce and makes me feel better
 }
 
 void Grid_t::makeWall(int x, int y) {
-    int  tileBlock = this->tiles[(x / 4 + (y / 2) * (this->width / 4))]; // grabs the datablock from the array of tiles
+    int tileBlock = this->tiles[(x / 4 + (y / 2) * (this->width / 4))];  // grabs the datablock from the array of tiles
 
-    int blockNum = ((x % 4)) + ((y % 2)*4);
+    int blockNum = ((x % 4)) + ((y % 2) * 4);
+
     tileBlock |= (0b1 << blockNum);
 
     this->tiles[(x / 4 + (y / 2) * (this->width / 4))] = tileBlock; // sets the datablock to the newly set data
 }
 
 // creates a new bike with the assigned values
-Bike_t::Bike_t(int x, int y, int id, Direction_t dir, Driver_t *driver) {
+Bike_t::Bike_t(int x, int y, int id, Direction_t dir, Driver_t *driver, uint16_t colour) {
     this->x       = x;
     this->y       = y;
     this->id      = id;
@@ -51,6 +53,7 @@ Bike_t::Bike_t(int x, int y, int id, Direction_t dir, Driver_t *driver) {
 
     this->currentDirection = dir;
     this->driver           = driver;
+    this->colour          = colour;
 }
 
 void Bike_t::drive(Grid_t *grid) {

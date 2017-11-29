@@ -53,8 +53,8 @@ void ifGameOverDraw(Grid_t *grid) {
 }
 
 void render(Grid_t *grid) {
-    drawRect(grid->bike1->getX(), grid->bike1->getY(), ILI9341_BLUE);
-    drawRect(grid->bike2->getX(), grid->bike2->getY(), ILI9341_RED);
+    drawRect(grid->bike1->getX(), grid->bike1->getY(), grid->bike1->getColour());
+    drawRect(grid->bike2->getX(), grid->bike2->getY(), grid->bike2->getColour());
 
     ifGameOverDraw(grid);
 }

@@ -85,7 +85,7 @@ void DriverSelectScreen::frame() {                        // this runs every fra
         if (p.x > 500 && p.y < 500) { //hitbox for start
             Driver_t* d1 = this->getNewDriver(1);
             Driver_t* d2 = this->getNewDriver(2);
-            this->changeScreen(new GameScreen(d1, d2));
+            this->changeScreen(new GameScreen(d1, d2, ILI9341_RED, ILI9341_BLUE));
             //this->changeScreen(new ColorSelectScreen();)
         }
         else if (p.x > 500 && p.y > 500) { //hitbox for back
