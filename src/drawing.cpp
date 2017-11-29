@@ -100,4 +100,5 @@ void drawName(int index, const char driver[], int highlighted, int driverID) {
     }
 
     tft.println(driver);
+    tft.setTextColor(ILI9341_WHITE, ILI9341_BLACK);
 }
