@@ -63,3 +63,40 @@ void render(Grid_t *grid) {
 void drawRect(int x, int y, uint16_t colour) {
     tft.fillRect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE, colour);
 }
+
+void generateMenuScreen(char* textCap)
+{
+	tft.drawLine(0, 20, 320, 20, ILI9341_WHITE);
+	tft.drawLine(0, 220, 320, 220, ILI9341_WHITE);
+	tft.drawLine(160, 20, 160, 240, ILI9341_WHITE);
+	tft.drawLine(161, 20,161, 240, ILI9341_WHITE);
+	tft.setCursor(150, 0);
+	tft.println(textCap);
+	tft.setCursor(0, 225);
+	tft.println("Back");
+	tft.setCursor(300, 225);
+	tft.println("Start");
+}
+
+void drawName(int index, const char driver[], int highlighted, int driverID) {
+    // 15 is the vertical span of a size-2 character
+    // (including the one pixel of padding below)
+	if (driverID == 1)
+	{
+		tft.setCursor(0, 8 * index + 25);
+	}
+	else
+	{
+		tft.setCursor(162, 8 * index + 25);
+	}
+
+    //changes the highlighing of restaurants
+    if (index == highlighted) {
+        tft.setTextColor(ILI9341_BLACK, ILI9341_WHITE);
+    }
+    else {
+        tft.setTextColor(ILI9341_WHITE, ILI9341_BLACK);
+    }
+
+    tft.println(driver);
+}

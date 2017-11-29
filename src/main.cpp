@@ -1,5 +1,4 @@
 #include <Arduino.h>
-
 #include "screenManager.h"
 
 #define MILLIS_PER_CYCLE    150           /* in milliseconds */
@@ -7,7 +6,6 @@
 int main() {
     init();             // begin arduino stuff
     Serial.begin(9600); // start serial moniter
-
 
     setUpGraphics();                     // initializes the graphics system, as well as draws boarder
 
