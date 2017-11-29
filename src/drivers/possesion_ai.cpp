@@ -77,6 +77,7 @@ int Possession_Driver::calculatePossession(Grid_t *grid, Turn_t turn) {
     }
 
     // appologies for mixing c and c++ memory allocations
+    // I wanted to reuse a list object I had already created
     int         w        = grid->width;
     int         h        = grid->height;
     List_t *    q        = createList(sizeof(Cell));

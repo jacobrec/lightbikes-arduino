@@ -37,13 +37,13 @@ void ifGameOverDraw(Grid_t *grid) {
     tft.setCursor(70, 60); // these numbers were carefully selected through trial and error
 
     if (!grid->bike2->getAlive() && !grid->bike1->getAlive()) {
-        tft.println("Draw :("); // sad face is so all three messages have the same number of charectors
+        tft.println(F("Draw :(")); // sad face is so all three messages have the same number of charectors
     }
     else if (!grid->bike2->getAlive()) {
-        tft.println("P1 Wins");
+        tft.println(F("P1 Wins"));// F() to save on ram
     }
     else if (!grid->bike1->getAlive()) {
-        tft.println("P2 Wins");
+        tft.println(F("P2 Wins"));// F() to save on ram
     }
     else{
         return;
