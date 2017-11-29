@@ -1,12 +1,6 @@
 
 
-const char* driverNames[5] = {
-    "Player",
-    "Hunter",
-    "Coward",
-    "Survivor",
-    "Smarter"
-};
+
 
 
 class DriverSelectScreen : public Screen {

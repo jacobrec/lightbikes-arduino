@@ -11,7 +11,6 @@
 #include "objects.h"
 #include "game.h"
 
-TouchScreen ts = TouchScreen(4, A2, A3, 5, 300);
 
 
 class Screen;

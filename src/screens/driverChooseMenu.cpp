@@ -5,6 +5,15 @@
 #define RIGHT_JOY_VERT     A5 /* should connect A1 to pin VRx of left joystick*/
 #define RIGHT_JOY_HORIZ    A4 /* should connect A0 to pin VRy of right joystick*/
 
+
+const char* driverNames[5] = {
+    "Player",
+    "Hunter",
+    "Coward",
+    "Survivor",
+    "Smarter"
+};
+
 Driver_t DriverSelectScreen::getNewDriver(int mode)
 {
 	int highlight;
@@ -54,22 +63,22 @@ void DriverSelectScreen::frame() { // this runs every frame
 	highlightDriver1 = constrain(highlightDriver1, 0, 4);//keep values of highlight between 0 and 4;
 	highlightDriver2 = constrain(highlightDriver2, 0 ,4);
 
-	// TSPoint p = ts.getPoint();
-	// 
-    // if (p.z > 500) //pressure detect
-    // {
-    //     if (p.x > 170 && p.y > 220) //hitbox for start
-	// 	{
-	// 		Driver_t d1 = this->getNewDriver(1);
-	// 		Driver_t d2 = this->getNewDriver(2);
-	// 		this->changeScreen(new GameScreen(&d1, &d2));
-	// 		//this->changeScreen(new ColorSelectScreen();)
-	// 	}
-	// 	else if (p.x < 155 && p.y > 220) //hitbox for back
-	// 	{
-	// 		this->changeScreen(new MainMenuScreen());
-	// 	}
-    // }
+	TSPoint p = touch_screen.getPoint();
+
+    if (p.z > 500) //pressure detect
+    {
+        if (p.x > 170 && p.y > 220) //hitbox for start
+		{
+			Driver_t d1 = this->getNewDriver(1);
+			Driver_t d2 = this->getNewDriver(2);
+			this->changeScreen(new GameScreen(&d1, &d2));
+			//this->changeScreen(new ColorSelectScreen();)
+		}
+		else if (p.x < 155 && p.y > 220) //hitbox for back
+		{
+			this->changeScreen(new MainMenuScreen());
+		}
+    }
 }
 
 DriverSelectScreen::~DriverSelectScreen() { // this is the destructor. any pointer variables you must delete here
