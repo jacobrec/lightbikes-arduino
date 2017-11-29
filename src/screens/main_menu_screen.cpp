@@ -1,14 +1,14 @@
 // IMPORTANT: this file is only to be included into screenManager.cpp and nowhere else
 MainMenuScreen::MainMenuScreen() { // this is the constructor
-    tft.setTextSize(3);
     tft.fillScreen(ILI9341_BLACK);
 }
 
 void MainMenuScreen::frame() { // this runs every frame
-
-    tft.setCursor(150, 3);
+    tft.setTextSize(3);
+    tft.setCursor(63, 3);
     tft.println("Lightbikes");
-    tft.setCursor( 0, 150);
+    tft.setCursor( 45, 150);
+    tft.setTextSize(1);
     tft.println("Press anywhere on the screen to start");
     TSPoint p = touch_screen.getPoint();
 
