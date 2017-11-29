@@ -195,9 +195,10 @@ void *preview(List_t *list) {
 }
 
 void destroyList(List_t *list) {
-    while (list->length) {
+    while (list->length > 0) {
         free(pop(list));
     }
+    free(list);
 }
 
 void SerialPrintf(char *fmt, ...) {

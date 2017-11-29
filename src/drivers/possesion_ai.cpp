@@ -9,6 +9,13 @@ void colourAndAddToQueue(LittleGrid *cellGrid, List_t *q, int x, int y, int w, C
     }
 }
 
+int freeRam() {
+    extern int __heap_start, *__brkval;
+    int        v;
+
+    return((int)&v - (__brkval == 0 ? (int)&__heap_start : (int)__brkval));
+}
+
 // this function takes in the grid and a direction, and it assumes it has travelled to that new location specified by the turn
 // then it counts up how many squares on the grid that it can get to before the opponent and returns that number
 // dying should return 0
@@ -16,6 +23,17 @@ int Possession_Driver::calculatePossession(Grid_t *grid, Turn_t turn) {
     int         mx; int my; // my x and y position
     int         ox; int oy; // other bikes x and y position
     Direction_t oDir;
+    SerialPrintf("Start: %d    ", freeRam());
+
+    // appologies for mixing c and c++ memory allocations
+    // I wanted to reuse a list object I had already created
+    int         w        = grid->width;
+    int         h        = grid->height;
+    List_t *    q        = createList(sizeof(Cell));
+    LittleGrid *cellGrid = new LittleGrid(w, h);
+
+    cellGrid->makeWall(mx, my, 3);
+    cellGrid->makeWall(ox, oy, 3);
 
     if (grid->bike1 == this->myBike) {
         mx   = grid->bike1->getX();
@@ -76,12 +94,6 @@ int Possession_Driver::calculatePossession(Grid_t *grid, Turn_t turn) {
         return(-32768);               // smallest int
     }
 
-    // appologies for mixing c and c++ memory allocations
-    // I wanted to reuse a list object I had already created
-    int         w        = grid->width;
-    int         h        = grid->height;
-    List_t *    q        = createList(sizeof(Cell));
-    LittleGrid *cellGrid = new LittleGrid(w, h);
 
     for (int x = 0; x < grid->width; x++) {
         for (int y = 0; y < grid->height; y++) {
@@ -90,6 +102,8 @@ int Possession_Driver::calculatePossession(Grid_t *grid, Turn_t turn) {
             }
         }
     }
+    cellGrid->makeWall(mx, my, 3);
+    cellGrid->makeWall(ox, oy, 3);
 
 
     Cell *c = (Cell * )malloc(sizeof(Cell));
@@ -107,7 +121,7 @@ int Possession_Driver::calculatePossession(Grid_t *grid, Turn_t turn) {
     free(c);
 
     while (q->length > 0) {
-        c = (Cell * )dequeue(q);
+        c = (Cell *)dequeue(q);
         int x = c->loc % w;
         int y = c->loc / w;
         cellGrid->makeWall(x, y, c->colour);
@@ -129,11 +143,13 @@ int Possession_Driver::calculatePossession(Grid_t *grid, Turn_t turn) {
             colourAndAddToQueue(cellGrid, q, x + 1, y, w, cn);
         }
 
+
         free(cn);
     }
 
     delete cellGrid;
     destroyList(q);
+    SerialPrintf("End: %d\n\r", freeRam());
     return(mine - theres);
 }
 
