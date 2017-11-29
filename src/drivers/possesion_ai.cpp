@@ -13,23 +13,23 @@ void colourAndAddToQueue(LittleGrid *cellGrid, List_t *q, int x, int y, int w, C
 // then it counts up how many squares on the grid that it can get to before the opponent and returns that number
 // dying should return 0
 int Possession_Driver::calculatePossession(Grid_t *grid, Turn_t turn) {
-    int mx; int my; // my x and y position
-    int ox; int oy; // other bikes x and y position
+    int         mx; int my; // my x and y position
+    int         ox; int oy; // other bikes x and y position
     Direction_t oDir;
+
     if (grid->bike1 == this->myBike) {
-        mx = grid->bike1->getX();
-        my = grid->bike1->getY();
-        ox = grid->bike2->getX();
-        oy = grid->bike2->getY();
+        mx   = grid->bike1->getX();
+        my   = grid->bike1->getY();
+        ox   = grid->bike2->getX();
+        oy   = grid->bike2->getY();
         oDir = grid->bike2->getDirection();
     }
     else{
-        mx = grid->bike2->getX();
-        my = grid->bike2->getY();
-        ox = grid->bike1->getX();
-        oy = grid->bike1->getY();
+        mx   = grid->bike2->getX();
+        my   = grid->bike2->getY();
+        ox   = grid->bike1->getX();
+        oy   = grid->bike1->getY();
         oDir = grid->bike1->getDirection();
-
     }
 
     Direction_t toGo = (Direction_t)((turn + this->myBike->getDirection() + 4) % 4);
@@ -73,7 +73,7 @@ int Possession_Driver::calculatePossession(Grid_t *grid, Turn_t turn) {
     // all locations are now ready for testing posession
 
     if (grid->getTile(mx, my) != 0) { // if would die, return 0
-        return(-3200);                // firure out smallest int
+        return(-32768);               // smallest int
     }
 
     // appologies for mixing c and c++ memory allocations
