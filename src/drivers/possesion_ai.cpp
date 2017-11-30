@@ -4,7 +4,10 @@
 
 void colourAndAddToQueue(LittleGrid *cellGrid, CellQueue *que, int x, int y, int w, uint8_t colour) {
     if (cellGrid->getTile(x, y) == 0b00) {
-        que->push({ x + y * w, colour });
+        Cell c;
+        c.loc = (uint16_t)(x + y * w);
+        c.colour = colour;
+        que->push(c);
         cellGrid->makeWall(x, y, colour);
     }
 }
@@ -20,34 +23,30 @@ int freeRam() {
 // then it counts up how many squares on the grid that it can get to before the opponent and returns that number
 // dying should return 0
 int Possession_Driver::calculatePossession(Grid_t *grid, Turn_t turn) {
-    int         mx; int my; // my x and y position
-    int         ox; int oy; // other bikes x and y position
-    Direction_t oDir;
+    int mx; int my;         // my x and y position
+    int ox; int oy;         // other bikes x and y position
 
-    int startRam = freeRam();
+    //int startRam = freeRam();
 
     int         w        = grid->width;
     int         h        = grid->height;
     CellQueue * que      = new CellQueue();
     LittleGrid *cellGrid = new LittleGrid(w, h);
 
-    cellGrid->makeWall(mx, my, 3);
-    cellGrid->makeWall(ox, oy, 3);
-
     if (grid->bike1 == this->myBike) {
-        mx   = grid->bike1->getX();
-        my   = grid->bike1->getY();
-        ox   = grid->bike2->getX();
-        oy   = grid->bike2->getY();
-        oDir = grid->bike2->getDirection();
+        mx = grid->bike1->getX();
+        my = grid->bike1->getY();
+        ox = grid->bike2->getX();
+        oy = grid->bike2->getY();
     }
     else{
-        mx   = grid->bike2->getX();
-        my   = grid->bike2->getY();
-        ox   = grid->bike1->getX();
-        oy   = grid->bike1->getY();
-        oDir = grid->bike1->getDirection();
+        mx = grid->bike2->getX();
+        my = grid->bike2->getY();
+        ox = grid->bike1->getX();
+        oy = grid->bike1->getY();
     }
+    cellGrid->makeWall(mx, my, 3);
+    cellGrid->makeWall(ox, oy, 3);
 
     Direction_t toGo = (Direction_t)((turn + this->myBike->getDirection() + 4) % 4);
     switch (toGo) {
@@ -91,24 +90,26 @@ int Possession_Driver::calculatePossession(Grid_t *grid, Turn_t turn) {
     if (cellGrid->getTile(mx, my) != 0) { // if would die, return 0
         delete que;
         delete cellGrid;
-        if (startRam > freeRam()) {
-            SerialPrintf("Losing memory, started with %d but now we only have %d", startRam, freeRam());
-        }
+        // if (startRam > freeRam()) {
+        //     SerialPrintf("Losing memory, started with %d but now we only have %d", startRam, freeRam());
+        // }
         return(-32768);               // smallest int
     }
 
     cellGrid->makeWall(mx, my, 3);
 
-
-    que->push({ox + oy * w, 2});
-    que->push({mx + my * w, 1});
+    Cell c;
+    c.loc = (uint16_t)(ox + oy * w);
+    c.colour = 2;
+    que->push(c);
+    c.loc = (uint16_t)(mx + my * w);
+    c.colour = 1;
+    que->push(c);
 
     int mine   = 0;
     int theres = 0;
 
-    int iterator = 0;
 
-    Cell c;
     while (que->getLength() > 0) {
         c = que->dequeue();
         int x = c.loc % w;
@@ -117,28 +118,22 @@ int Possession_Driver::calculatePossession(Grid_t *grid, Turn_t turn) {
 
         if (c.colour == 1) {
             mine++;
-            counterMine--;
         }
         else if (c.colour == 2) {
             theres++;
-            counterTheres--;
         }
         colourAndAddToQueue(cellGrid, que, x, y - 1, w, c.colour);
         colourAndAddToQueue(cellGrid, que, x, y + 1, w, c.colour);
         colourAndAddToQueue(cellGrid, que, x - 1, y, w, c.colour);
         colourAndAddToQueue(cellGrid, que, x + 1, y, w, c.colour);
-        iterator++;
-        if (iterator > 1000) { // more iterations then normal
-            SerialPrintf("iterator: %d\n\r", iterator);
-        }
     }
 
 
     delete que;
     delete cellGrid;
-    if (startRam > freeRam()) {
-        SerialPrintf("Losing memory, started with %d but now we only have %d", startRam, freeRam());
-    }
+    // if (startRam > freeRam()) {
+    //     SerialPrintf("Losing memory, started with %d but now we only have %d", startRam, freeRam());
+    // }
 
     return(mine - theres);
 }
