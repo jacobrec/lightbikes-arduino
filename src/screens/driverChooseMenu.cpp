@@ -5,7 +5,7 @@
 #define RIGHT_JOY_VERT     A5 /* should connect A1 to pin VRx of left joystick*/
 #define RIGHT_JOY_HORIZ    A4 /* should connect A0 to pin VRy of right joystick*/
 
-#define ROSTER_COUNT       6
+#define ROSTER_COUNT       5
 
 
 const char *driverNames[ROSTER_COUNT] = {
@@ -14,7 +14,6 @@ const char *driverNames[ROSTER_COUNT] = {
     "Coward",
     "Survivor",
     "Horder",
-    "Better"
 };
 
 Driver_t *DriverSelectScreen::getNewDriver(int mode) {
@@ -47,8 +46,6 @@ Driver_t *DriverSelectScreen::getNewDriver(int mode) {
         case 4:
             return(new Possession_Driver());
 
-        case 5:
-            return(new Better_Possession_Driver());
     }
 }
 

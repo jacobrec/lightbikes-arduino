@@ -19,7 +19,7 @@ private:
     Tile *tiles; // tiles are stored with 8 tiles per byte. tiles[0] holds the 8 tiles that are in the top left corner in a rectangle formation, this is to save space on the arduinos limited memory
 public:
     // height and width/2 must be divisible by 2 due to the encoding, this encoding however uses 12.5% of the memory it would otherwise use
-    Grid_t(int height, int width, Driver_t *d1, Driver_t *d2, uint16_t colour1, uint16_t colour2);
+    Grid_t(int width, int height, Driver_t *d1, Driver_t *d2, uint16_t colour1, uint16_t colour2);
     ~Grid_t();
 
     Tile getTile(int x, int y);
