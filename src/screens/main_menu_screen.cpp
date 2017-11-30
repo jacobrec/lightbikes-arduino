@@ -7,7 +7,7 @@ MainMenuScreen::MainMenuScreen() { // this is the constructor
 void MainMenuScreen::frame() { // this runs every frame
     tft.setTextColor(ILI9341_WHITE);
     tft.setTextSize(3);
-    tft.setCursor(63, 3);
+    tft.setCursor(63, 10);
     tft.println("Lightbikes");
     tft.setCursor( 45, 150);
     tft.setTextSize(1);
