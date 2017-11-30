@@ -14,7 +14,6 @@ Turn_t getTurn(Direction_t to, Direction_t from);
 #include "drivers/stalker_ai.h"
 #include "drivers/runner_ai.h"
 #include "drivers/possesion_ai.h"
-#include "drivers/better_possesion_ai.h"
 
 
 
