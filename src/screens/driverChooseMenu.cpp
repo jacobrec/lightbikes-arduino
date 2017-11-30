@@ -5,7 +5,7 @@
 #define RIGHT_JOY_VERT     A5 /* should connect A1 to pin VRx of left joystick*/
 #define RIGHT_JOY_HORIZ    A4 /* should connect A0 to pin VRy of right joystick*/
 
-#define ROSTER_COUNT 5
+#define ROSTER_COUNT       6
 
 
 const char *driverNames[ROSTER_COUNT] = {
@@ -13,7 +13,8 @@ const char *driverNames[ROSTER_COUNT] = {
     "Hunter",
     "Coward",
     "Survivor",
-    "Horder"
+    "Horder",
+    "Better"
 };
 
 Driver_t *DriverSelectScreen::getNewDriver(int mode) {
@@ -45,6 +46,9 @@ Driver_t *DriverSelectScreen::getNewDriver(int mode) {
 
         case 4:
             return(new Possession_Driver());
+
+        case 5:
+            return(new Better_Possession_Driver());
     }
 }
 
@@ -65,8 +69,8 @@ void DriverSelectScreen::frame() {                        // this runs every fra
     int oH1 = highlightDriver1;
     int oH2 = highlightDriver2;
 
-    highlightDriver1 = constrain(highlightDriver1 + joyControl(1), 0, ROSTER_COUNT-1); //keep values of highlight between 0 and 4;
-    highlightDriver2 = constrain(highlightDriver2 + joyControl(2), 0, ROSTER_COUNT-1);
+    highlightDriver1 = constrain(highlightDriver1 + joyControl(1), 0, ROSTER_COUNT - 1); //keep values of highlight between 0 and 4;
+    highlightDriver2 = constrain(highlightDriver2 + joyControl(2), 0, ROSTER_COUNT - 1);
 
     if (oH1 != highlightDriver1) {
         for (int i = 0; i < ROSTER_COUNT; i++) {
