@@ -50,7 +50,7 @@ DriverSelectScreen::DriverSelectScreen() { // this is the constructor
     tft.setTextSize(2);
 
     tft.setCursor(50, 5);
-    generateMenuScreen(DRIVER_MENU_MESSAGE);
+    generateMenuScreen(DRIVER_MENU_MESSAGE, "Next");
 
 
     for (int i = 0; i < ROSTER_COUNT; i++) {

@@ -12,8 +12,6 @@
 
 Adafruit_ILI9341 tft = Adafruit_ILI9341(TFT_CS, TFT_DC);
 
-
-
 void setUpGraphics() {
     // set up for tft
     tft.begin();
@@ -64,7 +62,7 @@ void drawRect(int x, int y, uint16_t colour) {
     tft.fillRect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE, colour);
 }
 
-void generateMenuScreen(const char *textCap) {
+void generateMenuScreen(const char* textCap, const char* nextPrompt) {
     //Serial.println("Printing menu template");
     tft.setTextSize(2);
     tft.drawLine(0, 40, 320, 40, ILI9341_WHITE);
@@ -72,11 +70,12 @@ void generateMenuScreen(const char *textCap) {
     tft.drawLine(160, 40, 160, 240, ILI9341_WHITE);
     tft.drawLine(161, 40, 161, 240, ILI9341_WHITE);
 
+    tft.setCursor(getCursorCentered(textCap, 0, 320), 5);
     tft.println(textCap);
-    tft.setCursor(50, 215);
+    tft.setCursor(getCursorCentered("Back", 0, 160), 215);
     tft.println(F("Back"));
-    tft.setCursor(210, 215);
-    tft.println(F("Start"));
+    tft.setCursor(getCursorCentered(nextPrompt, 161, 320), 215);
+    tft.println(nextPrompt);
 }
 
 void drawName(int index, const char driver[], int highlighted, int driverID) {
@@ -99,4 +98,34 @@ void drawName(int index, const char driver[], int highlighted, int driverID) {
 
     tft.println(driver);
     tft.setTextColor(ILI9341_WHITE, ILI9341_BLACK);
+}
+
+
+int getCursorCentered(const char* str, int xStart, int xEnd) //finds where cursor should be placed
+                                                             //such that the text is centered
+{
+    int stringlen = getLength(str);
+    int boxCenter = (xEnd - xStart)/2;
+
+    return(boxCenter - (stringlen/2)*6*2 +xStart); //returns the center of box offset by half the char
+                                                   //length, then adds that to starting point of box
+                                                   //*6*2 is for changing txt size, currently set for size 2
+}
+
+int getLength(const char* str) //gets str length cuz i couldn't make the included one work
+{
+    int length = 0;
+    while(true) //will loop for each non NULL value and counts amount of char
+    {
+        if (str[length] == '\0')
+        {
+            break;
+        }
+        else
+        {
+            length++;
+        }
+    }
+    Serial.print(length);
+    return(length);
 }

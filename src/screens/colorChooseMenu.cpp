@@ -34,7 +34,7 @@ ColorSelectScreen::ColorSelectScreen(Driver_t *d1, Driver_t *d2) { // this is th
     tft.setTextSize(2);
     tft.setCursor(60, 5);
     tft.fillScreen(ILI9341_BLACK);
-    generateMenuScreen(COLOUR_MENU_MESSAGE);
+    generateMenuScreen(COLOUR_MENU_MESSAGE, "Start");
     this->currentColor1 = 0;
     this->currentColor2 = 1;
     this->d1            = d1;
