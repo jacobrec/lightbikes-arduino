@@ -68,35 +68,9 @@ int Possession_Driver::calculatePossession(Grid_t *grid, Turn_t turn) {
             break;
     }
 
-    switch (oDir) {
-        case NORTH:
-            oy++;
-            break;
-
-        case WEST:
-            ox--;
-            break;
-
-        case SOUTH:
-            oy--;
-            break;
-
-        case EAST:
-            ox++;
-            break;
-    }
-
 
     // all locations are now ready for testing posession
 
-    if (grid->getTile(mx, my) != 0) { // if would die, return 0
-        delete que;
-        delete cellGrid;
-        if (startRam > freeRam()) {
-            SerialPrintf("Losing memory, started with %d but now we only have %d", startRam, freeRam());
-        }
-        return(-32768);               // smallest int
-    }
 
 
     for (int x = 0; x < grid->width; x++) {
@@ -106,8 +80,24 @@ int Possession_Driver::calculatePossession(Grid_t *grid, Turn_t turn) {
             }
         }
     }
+    // Un comment these next few lines to avoid ties
+    // Although, ties are not losses and going kamazai does decrease losses
+    // cellGrid->makeWall(ox+1, oy, 3);
+    // cellGrid->makeWall(ox-1, oy, 3);
+    // cellGrid->makeWall(ox, oy+1, 3);
+    // cellGrid->makeWall(ox, oy-1, 3);
+
+
+    if (cellGrid->getTile(mx, my) != 0) { // if would die, return 0
+        delete que;
+        delete cellGrid;
+        if (startRam > freeRam()) {
+            SerialPrintf("Losing memory, started with %d but now we only have %d", startRam, freeRam());
+        }
+        return(-32768);               // smallest int
+    }
+
     cellGrid->makeWall(mx, my, 3);
-    cellGrid->makeWall(ox, oy, 3);
 
 
     Cell c;
