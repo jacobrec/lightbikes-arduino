@@ -45,8 +45,11 @@ public:
 
 int joyControl(int driverID);
 
+int wrapAround(int var, int low, int high);
+
 #include "screens/game_screen.h"
 #include "screens/main_menu_screen.h"
 #include "screens/driverChooseMenu.h"
+#include "screens/colorChooseMenu.h"
 
 #endif

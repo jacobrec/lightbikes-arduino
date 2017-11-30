@@ -5,16 +5,19 @@
 #define RIGHT_JOY_VERT     A5 /* should connect A1 to pin VRx of left joystick*/
 #define RIGHT_JOY_HORIZ    A4 /* should connect A0 to pin VRy of right joystick*/
 
+#define ROSTER_COUNT       6
 
-const char *driverNames[5] = {
+
+const char *driverNames[ROSTER_COUNT] = {
     "Player",
     "Hunter",
     "Coward",
     "Survivor",
-    "Smarter"
+    "Harder",
+    "Better"
 };
 
-Driver_t* DriverSelectScreen::getNewDriver(int mode) {
+Driver_t *DriverSelectScreen::getNewDriver(int mode) {
     int highlight;
 
     if (mode == 1) {
@@ -43,6 +46,9 @@ Driver_t* DriverSelectScreen::getNewDriver(int mode) {
 
         case 4:
             return(new Possession_Driver());
+
+        case 5:
+            return(new Better_Possession_Driver());
     }
 }
 
@@ -51,43 +57,45 @@ DriverSelectScreen::DriverSelectScreen() { // this is the constructor
     this->highlightDriver2 = 0;
     tft.fillScreen(ILI9341_BLACK);
     tft.setTextSize(2);
+
     tft.setCursor(50, 5);
 	generateMenuScreen("Choose your driver");
 
-    for (int i = 0; i < 5; i++) {
+
+    for (int i = 0; i < ROSTER_COUNT; i++) {
         drawName(i, driverNames[i], highlightDriver1, 1); //drivers is str of driver types
         drawName(i, driverNames[i], highlightDriver2, 2);
     }
 }
 
 void DriverSelectScreen::frame() {                        // this runs every frame
-	int oH1 = highlightDriver1;
+    int oH1 = highlightDriver1;
     int oH2 = highlightDriver2;
 
-    highlightDriver1 = wrapAround(highlightDriver1 + joyControl(1), 0, 4); //keep values of highlight between 0 and 4;
-    highlightDriver2 = wrapAround(highlightDriver2 + joyControl(2), 0, 4);
+
+    highlightDriver1 = wrapAround(highlightDriver1 + joyControl(1), 0, 5); //keep values of highlight between 0 and 4;
+    highlightDriver2 = wrapAround(highlightDriver2 + joyControl(2), 0, 5);
 
     if (oH1 != highlightDriver1) {
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < ROSTER_COUNT; i++) {
             drawName(i, driverNames[i], highlightDriver1, 1); //drivers is str of driver types
         }
     }
     if (oH2 != highlightDriver2) {
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < ROSTER_COUNT; i++) {
             drawName(i, driverNames[i], highlightDriver2, 2);
         }
     }
 
     TSPoint p = touch_screen.getPoint();
-	SerialPrintf("p.x: %d, p.y %d, p.z: %d\r\n",p.x,p.y,p.z);
 
 
-    if (p.z > 100) {                  //pressure detect
+    if (p.z > 50) {                  //pressure detect
         if (p.x > 500 && p.y < 500) { //hitbox for start
             Driver_t* d1 = this->getNewDriver(1);
             Driver_t* d2 = this->getNewDriver(2);
             this->changeScreen(new ColorSelectScreen(d1, d2));
-            //this->changeScreen(new ColorSelectScreen();)
+            //this->changeScreen(new ColorSelectScreen();
         }
         else if (p.x > 500 && p.y > 500) { //hitbox for back
             this->changeScreen(new MainMenuScreen());

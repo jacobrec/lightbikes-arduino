@@ -65,8 +65,9 @@ public:
     int getID() {
         return(this->id);
     }
-    uint16_t getColour(){
-        return this->colour;
+
+    uint16_t getColour() {
+        return(this->colour);
     }
 
     friend void checkCollision(Bike_t *bike, Grid_t *grid);

@@ -65,12 +65,13 @@ void drawRect(int x, int y, uint16_t colour) {
 }
 
 void generateMenuScreen(char *textCap) {
+    Serial.println("Printing menu template");
     tft.setTextSize(2);
     tft.drawLine(0, 40, 320, 40, ILI9341_WHITE);
     tft.drawLine(0, 200, 320, 200, ILI9341_WHITE);
     tft.drawLine(160, 40, 160, 240, ILI9341_WHITE);
     tft.drawLine(161, 40, 161, 240, ILI9341_WHITE);
-    tft.setCursor(50, 5);
+    
     tft.println(textCap);
     tft.setCursor(50, 215);
     tft.println(F("Back"));
