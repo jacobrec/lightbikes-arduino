@@ -1,11 +1,11 @@
 #include "../util.h"
 
 
-void colourAndAddToQueue(LittleGrid *cellGrid, List_t *q, int x, int y, int w, Cell *cn) {
+
+void colourAndAddToQueue(LittleGrid *cellGrid, CellQueue *que, int x, int y, int w, uint8_t colour) {
     if (cellGrid->getTile(x, y) == 0b00) {
-        cn->loc = x + y * w;
-        push(q, cn);
-        cellGrid->makeWall(x, y, cn->colour);
+        que->push({ x + y * w, colour });
+        cellGrid->makeWall(x, y, colour);
     }
 }
 
@@ -23,13 +23,12 @@ int Possession_Driver::calculatePossession(Grid_t *grid, Turn_t turn) {
     int         mx; int my; // my x and y position
     int         ox; int oy; // other bikes x and y position
     Direction_t oDir;
-    SerialPrintf("Start: %d    ", freeRam());
 
-    // appologies for mixing c and c++ memory allocations
-    // I wanted to reuse a list object I had already created
+    SerialPrintf("Start: %d\n\r",freeRam());
+
     int         w        = grid->width;
     int         h        = grid->height;
-    List_t *    q        = createList(sizeof(Cell));
+    CellQueue * que      = new CellQueue();
     LittleGrid *cellGrid = new LittleGrid(w, h);
 
     cellGrid->makeWall(mx, my, 3);
@@ -91,6 +90,8 @@ int Possession_Driver::calculatePossession(Grid_t *grid, Turn_t turn) {
     // all locations are now ready for testing posession
 
     if (grid->getTile(mx, my) != 0) { // if would die, return 0
+        delete que;
+        delete cellGrid;
         return(-32768);               // smallest int
     }
 
@@ -106,50 +107,42 @@ int Possession_Driver::calculatePossession(Grid_t *grid, Turn_t turn) {
     cellGrid->makeWall(ox, oy, 3);
 
 
-    Cell *c = (Cell * )malloc(sizeof(Cell));
-    c->loc    = mx + my * w;
-    c->colour = 1;
-    push(q, c);
-
-    c->loc    = ox + oy * w;
-    c->colour = 2;
-    push(q, c);
+    Cell c;
+    c.loc    = mx + my * w;
+    c.colour = 1;
+    que->push(c);
+    c.loc    = ox + oy * w;
+    c.colour = 2;
+    que->push(c);
 
     int mine   = 0;
     int theres = 0;
 
-    free(c);
 
-    while (q->length > 0) {
-        c = (Cell *)dequeue(q);
-        int x = c->loc % w;
-        int y = c->loc / w;
-        cellGrid->makeWall(x, y, c->colour);
+    while (que->getLength() > 0) {
+        c = que->dequeue();
+        int x = c.loc % w;
+        int y = c.loc / w;
+        cellGrid->makeWall(x, y, c.colour);
 
-        Cell *cn = (Cell *)malloc(sizeof(Cell));
-        cn->colour = c->colour;
-        if (cn->colour == 1) {
+        if (c.colour == 1) {
             mine++;
         }
-        else if (cn->colour == 2) {
+        else if (c.colour == 2) {
             theres++;
         }
-        free(c);
-
-        if (cellGrid->getTile(x, y) == 0b00) {
-            colourAndAddToQueue(cellGrid, q, x, y - 1, w, cn);
-            colourAndAddToQueue(cellGrid, q, x, y + 1, w, cn);
-            colourAndAddToQueue(cellGrid, q, x - 1, y, w, cn);
-            colourAndAddToQueue(cellGrid, q, x + 1, y, w, cn);
+        if (cellGrid->getTile(x,y) == 0) {
+            colourAndAddToQueue(cellGrid, que, x, y - 1, w, c.colour);
+            colourAndAddToQueue(cellGrid, que, x, y + 1, w, c.colour);
+            colourAndAddToQueue(cellGrid, que, x - 1, y, w, c.colour);
+            colourAndAddToQueue(cellGrid, que, x + 1, y, w, c.colour);
         }
-
-
-        free(cn);
     }
 
+    delete que;
     delete cellGrid;
-    destroyList(q);
-    SerialPrintf("End: %d\n\r", freeRam());
+    SerialPrintf("End: %d\n\r",freeRam());
+
     return(mine - theres);
 }
 

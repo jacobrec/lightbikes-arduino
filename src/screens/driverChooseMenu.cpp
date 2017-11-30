@@ -14,7 +14,7 @@ const char *driverNames[5] = {
     "Smarter"
 };
 
-Driver_t* DriverSelectScreen::getNewDriver(int mode) {
+Driver_t *DriverSelectScreen::getNewDriver(int mode) {
     int highlight;
 
     if (mode == 1) {
@@ -51,7 +51,7 @@ DriverSelectScreen::DriverSelectScreen() { // this is the constructor
     this->highlightDriver2 = 0;
     tft.fillScreen(ILI9341_BLACK);
     tft.setTextSize(2);
-	generateMenuScreen("Choose your driver");
+    generateMenuScreen("Choose your driver");
 
     for (int i = 0; i < 5; i++) {
         drawName(i, driverNames[i], highlightDriver1, 1); //drivers is str of driver types
@@ -60,7 +60,7 @@ DriverSelectScreen::DriverSelectScreen() { // this is the constructor
 }
 
 void DriverSelectScreen::frame() {                        // this runs every frame
-	int oH1 = highlightDriver1;
+    int oH1 = highlightDriver1;
     int oH2 = highlightDriver2;
 
     highlightDriver1 = constrain(highlightDriver1 + joyControl(1), 0, 4); //keep values of highlight between 0 and 4;
@@ -78,15 +78,13 @@ void DriverSelectScreen::frame() {                        // this runs every fra
     }
 
     TSPoint p = touch_screen.getPoint();
-	SerialPrintf("p.x: %d, p.y %d, p.z: %d\r\n",p.x,p.y,p.z);
 
 
     if (p.z > 100) {                  //pressure detect
         if (p.x > 500 && p.y < 500) { //hitbox for start
-            Driver_t* d1 = this->getNewDriver(1);
-            Driver_t* d2 = this->getNewDriver(2);
+            Driver_t *d1 = this->getNewDriver(1);
+            Driver_t *d2 = this->getNewDriver(2);
             this->changeScreen(new GameScreen(d1, d2, ILI9341_RED, ILI9341_BLUE));
-            //this->changeScreen(new ColorSelectScreen();)
         }
         else if (p.x > 500 && p.y > 500) { //hitbox for back
             this->changeScreen(new MainMenuScreen());
