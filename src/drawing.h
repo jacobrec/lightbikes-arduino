@@ -9,6 +9,6 @@ void render(Grid_t *grid);
 void drawRect(int x, int y, uint16_t colour);
 void generateMenuScreen(const char *textCap, const char* nextPrompt);
 void drawName(int index, const char *driver, int highlighted, int driverID);
-int getCursorCentered(const char* str, int xStart, int xEnd);
+int getCursorCentered(const char* str, int xStart, int xEnd, int txtSize);
 int getLength(const char* str);
 #endif
