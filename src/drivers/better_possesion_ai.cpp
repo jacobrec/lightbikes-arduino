@@ -55,9 +55,6 @@ int Better_Possession_Driver::calculatePossession(Grid_t *grid, Turn_t turn) {
 
 
     // all locations are now ready for testing posession
-
-
-
     for (int x = 0; x < grid->width; x++) {
         for (int y = 0; y < grid->height; y++) {
             if (grid->getTile(x, y) != 0) {
@@ -71,6 +68,11 @@ int Better_Possession_Driver::calculatePossession(Grid_t *grid, Turn_t turn) {
     // cellGrid->makeWall(ox-1, oy, 3);
     // cellGrid->makeWall(ox, oy+1, 3);
     // cellGrid->makeWall(ox, oy-1, 3);
+
+    // TODO: check to see if this turn will seperate the player and opponent,
+    // if seperated return high for advantagous position, return low for disadvantagous position
+
+    // TODO: if seperated, try and play differntly
 
 
     if (cellGrid->getTile(mx, my) != 0) { // if would die, return 0
