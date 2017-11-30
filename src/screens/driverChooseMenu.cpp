@@ -5,8 +5,10 @@
 #define RIGHT_JOY_VERT     A5 /* should connect A1 to pin VRx of left joystick*/
 #define RIGHT_JOY_HORIZ    A4 /* should connect A0 to pin VRy of right joystick*/
 
+#define ROSTER_COUNT 5
 
-const char *driverNames[5] = {
+
+const char *driverNames[ROSTER_COUNT] = {
     "Player",
     "Hunter",
     "Coward",
@@ -53,7 +55,7 @@ DriverSelectScreen::DriverSelectScreen() { // this is the constructor
     tft.setTextSize(2);
     generateMenuScreen("Choose your driver");
 
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < ROSTER_COUNT; i++) {
         drawName(i, driverNames[i], highlightDriver1, 1); //drivers is str of driver types
         drawName(i, driverNames[i], highlightDriver2, 2);
     }
@@ -63,16 +65,16 @@ void DriverSelectScreen::frame() {                        // this runs every fra
     int oH1 = highlightDriver1;
     int oH2 = highlightDriver2;
 
-    highlightDriver1 = constrain(highlightDriver1 + joyControl(1), 0, 4); //keep values of highlight between 0 and 4;
-    highlightDriver2 = constrain(highlightDriver2 + joyControl(2), 0, 4);
+    highlightDriver1 = constrain(highlightDriver1 + joyControl(1), 0, ROSTER_COUNT-1); //keep values of highlight between 0 and 4;
+    highlightDriver2 = constrain(highlightDriver2 + joyControl(2), 0, ROSTER_COUNT-1);
 
     if (oH1 != highlightDriver1) {
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < ROSTER_COUNT; i++) {
             drawName(i, driverNames[i], highlightDriver1, 1); //drivers is str of driver types
         }
     }
     if (oH2 != highlightDriver2) {
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < ROSTER_COUNT; i++) {
             drawName(i, driverNames[i], highlightDriver2, 2);
         }
     }
