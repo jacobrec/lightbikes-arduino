@@ -1,10 +1,4 @@
 // IMPORTANT: this file is only to be included into screenManager.cpp and nowhere else
-#define LEFT_JOY_VERT      A1 /* should connect A1 to pin VRx of left joystick*/
-#define LEFT_JOY_HORIZ     A0 /* should connect A0 to pin VRy of right joystick*/
-
-#define RIGHT_JOY_VERT     A5 /* should connect A1 to pin VRx of left joystick*/
-#define RIGHT_JOY_HORIZ    A4 /* should connect A0 to pin VRy of right joystick*/
-
 #define ROSTER_COUNT       5
 
 

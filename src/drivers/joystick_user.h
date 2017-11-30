@@ -3,9 +3,10 @@ class Joystick_Driver : public Driver_t {
 private:
     uint8_t pinX; uint8_t pinY;
     Direction_t getJoystickDirection(Direction_t current);
+    bool isOld;
 
 public:
-    Joystick_Driver(uint8_t pinX, uint8_t pinY);
+    Joystick_Driver(uint8_t pinX, uint8_t pinY, bool isOld);
     Turn_t steer(Grid_t *grid);
 };
 

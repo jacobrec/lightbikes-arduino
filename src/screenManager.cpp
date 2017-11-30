@@ -1,9 +1,9 @@
 #include "screenManager.h"
-#define LEFT_JOY_VERT      A0 /* should connect A1 to pin VRx of left joystick*/
-#define LEFT_JOY_HORIZ     A1 /* should connect A0 to pin VRy of right joystick*/
+#define LEFT_JOY_VERT      A1 /* should connect A1 to pin VRx of left joystick*/
+#define LEFT_JOY_HORIZ     A0 /* should connect A0 to pin VRy of right joystick*/
 
-#define RIGHT_JOY_VERT     A4 /* should connect A1 to pin VRx of left joystick*/
-#define RIGHT_JOY_HORIZ    A5 /* should connect A0 to pin VRy of right joystick*/
+#define RIGHT_JOY_VERT     A5 /* should connect A4 to pin VRx of left joystick*/
+#define RIGHT_JOY_HORIZ    A5 /* should connect A5 to pin VRy of right joystick*/
 
 #define ANALOG_IN_SIZE     1023
 

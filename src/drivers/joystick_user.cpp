@@ -1,23 +1,28 @@
 // IMPORTANT: this file is only to be included into drivers.cpp and nowhere else
-#define LEFT_JOY_VERT      A0 /* should connect A1 to pin VRx of left joystick*/
-#define LEFT_JOY_HORIZ     A1 /* should connect A0 to pin VRy of right joystick*/
+#define LEFT_JOY_VERT      A1 /* should connect A1 to pin VRx of left joystick*/
+#define LEFT_JOY_HORIZ     A0 /* should connect A0 to pin VRy of right joystick*/
 
-#define RIGHT_JOY_VERT     A4 /* should connect A1 to pin VRx of left joystick*/
-#define RIGHT_JOY_HORIZ    A5 /* should connect A0 to pin VRy of right joystick*/
+#define RIGHT_JOY_VERT     A5 /* should connect A1 to pin VRx of left joystick*/
+#define RIGHT_JOY_HORIZ    A4 /* should connect A0 to pin VRy of right joystick*/
 
 
 
 #define ANALOG_IN_SIZE    1023
 
-Joystick_Driver::Joystick_Driver(uint8_t pinX, uint8_t pinY) {
+Joystick_Driver::Joystick_Driver(uint8_t pinX, uint8_t pinY, bool isOld) {
     this->pinX = pinX;
     this->pinY = pinY;
+    this->isOld = isOld;
 }
 
 Direction_t Joystick_Driver::getJoystickDirection(Direction_t current) {
     // reads in analog stick readings, and maps it to a positive negitive scale so 0 is neutral
     int y_joy = map(analogRead(this->pinY), 0, ANALOG_IN_SIZE, -ANALOG_IN_SIZE, ANALOG_IN_SIZE);
     int x_joy = map(analogRead(this->pinX), 0, ANALOG_IN_SIZE, -ANALOG_IN_SIZE, ANALOG_IN_SIZE);
+
+    if (this->isOld) {
+        x_joy *= -1;
+    }
 
     if (abs(y_joy) > abs(x_joy)) {             // if the y axis is pushed more then the x axis
         if (abs(y_joy) > ANALOG_IN_SIZE / 2) { // return north or south depending on the direction the jotsyick is pressed
@@ -37,9 +42,9 @@ Turn_t Joystick_Driver::steer(Grid_t *grid) {
 }
 
 Joystick_Driver *createUserR_Driver() {
-    return(new Joystick_Driver(RIGHT_JOY_HORIZ, RIGHT_JOY_VERT));
+    return(new Joystick_Driver(RIGHT_JOY_HORIZ, RIGHT_JOY_VERT, false)); // the true and false depends on the wiring of the board
 }
 
 Joystick_Driver *createUserL_Driver() {
-    return(new Joystick_Driver(LEFT_JOY_HORIZ, LEFT_JOY_VERT));
+    return(new Joystick_Driver(LEFT_JOY_HORIZ, LEFT_JOY_VERT, true)); // the true and false depends on the wiring of the board
 }
