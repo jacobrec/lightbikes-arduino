@@ -9,6 +9,12 @@ void colourAndAddToQueue(LittleGrid *cellGrid, CellQueue *que, int x, int y, int
     }
 }
 
+int freeRam() {
+    extern int __heap_start, *__brkval;
+    int        v;
+
+    return((int)&v - (__brkval == 0 ? (int)&__heap_start : (int)__brkval));
+}
 
 // this function takes in the grid and a direction, and it assumes it has travelled to that new location specified by the turn
 // then it counts up how many squares on the grid that it can get to before the opponent and returns that number
@@ -17,6 +23,8 @@ int Possession_Driver::calculatePossession(Grid_t *grid, Turn_t turn) {
     int         mx; int my; // my x and y position
     int         ox; int oy; // other bikes x and y position
     Direction_t oDir;
+
+    SerialPrintf("Start: %d\n\r", freeRam());
 
     int         w        = grid->width;
     int         h        = grid->height;
@@ -133,6 +141,7 @@ int Possession_Driver::calculatePossession(Grid_t *grid, Turn_t turn) {
 
     delete que;
     delete cellGrid;
+    SerialPrintf("End: %d\n\r", freeRam());
 
     return(mine - theres);
 }
