@@ -13,7 +13,7 @@ const char *driverNames[ROSTER_COUNT] = {
     "Hunter",
     "Coward",
     "Survivor",
-    "Smarter"
+    "Horder"
 };
 
 Driver_t *DriverSelectScreen::getNewDriver(int mode) {
