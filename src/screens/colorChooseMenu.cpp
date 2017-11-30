@@ -1,3 +1,10 @@
+#define Y1 120
+#define Y2 100
+#define Y3 140
+#define X_LEFT 55
+#define X_RIGHT 225
+#define SQUARE_SIZE 41
+
 uint16_t ColorSelectScreen::fetchColor(int color)
 {
 	Serial.print("Fetching color");
@@ -22,12 +29,12 @@ ColorSelectScreen::ColorSelectScreen(Driver_t* d1, Driver_t* d2) { // this is th
 	this->currentColor2 = 1;
 	this->d1 = d1;
 	this->d2 = d2;
-	tft.fillTriangle(20, 120, 40, 100, 40, 140, ILI9341_WHITE);
-	tft.fillTriangle(130, 120, 110, 100, 110, 140, ILI9341_WHITE);
-	tft.fillTriangle(190, 120, 210, 100, 210, 140, ILI9341_WHITE);
-	tft.fillTriangle(300, 120, 280, 100, 280, 140, ILI9341_WHITE);
-	tft.fillRect(55, 102, 41, 41, ColorSelectScreen::fetchColor(currentColor1));
-	tft.fillRect(225, 102, 41, 41, ColorSelectScreen::fetchColor(currentColor2));
+	tft.fillTriangle(X_LEFT - 35, Y1, X_LEFT - 15, Y2, X_LEFT - 15, Y3, ILI9341_WHITE);
+	tft.fillTriangle(X_LEFT + 75, Y1, X_LEFT + 55, Y2, X_LEFT + 55, Y3, ILI9341_WHITE);
+	tft.fillTriangle(X_RIGHT - 35, Y1, X_RIGHT - 15, Y2, X_RIGHT - 15, Y3, ILI9341_WHITE);
+	tft.fillTriangle(X_RIGHT + 75, Y1, X_RIGHT + 55, Y2, X_RIGHT + 55, Y3, ILI9341_WHITE);
+	tft.fillRect(X_LEFT, Y2, SQUARE_SIZE, SQUARE_SIZE, ColorSelectScreen::fetchColor(currentColor1));
+	tft.fillRect(X_RIGHT, Y2, SQUARE_SIZE, SQUARE_SIZE, ColorSelectScreen::fetchColor(currentColor2));
 }
 
 void ColorSelectScreen::frame() { // this runs every frame
@@ -81,8 +88,8 @@ void ColorSelectScreen::frame() { // this runs every frame
 	if (oldColor1 != currentColor1 || oldColor2 != currentColor2)
 	{
 		Serial.print("Printing rect");
-		tft.fillRect(55, 102, 41, 41, ColorSelectScreen::fetchColor(currentColor1));
-		tft.fillRect(225, 102, 41, 41, ColorSelectScreen::fetchColor(currentColor2));
+		tft.fillRect(X_LEFT, Y2, SQUARE_SIZE, SQUARE_SIZE, ColorSelectScreen::fetchColor(currentColor1));
+		tft.fillRect(X_RIGHT, Y2, SQUARE_SIZE, SQUARE_SIZE, ColorSelectScreen::fetchColor(currentColor2));
 	}
 }
 

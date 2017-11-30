@@ -35,7 +35,7 @@ void drawGrid(Grid_t *grid) {
 
 void ifGameOverDraw(Grid_t *grid) {
     tft.setCursor(70, 60); // these numbers were carefully selected through trial and error
-
+    tft.setTextColor(ILI9341_WHITE);
     if (!grid->bike2->getAlive() && !grid->bike1->getAlive()) {
         tft.println(F("Draw :(")); // sad face is so all three messages have the same number of charectors
     }
@@ -71,7 +71,7 @@ void generateMenuScreen(char *textCap) {
     tft.drawLine(0, 200, 320, 200, ILI9341_WHITE);
     tft.drawLine(160, 40, 160, 240, ILI9341_WHITE);
     tft.drawLine(161, 40, 161, 240, ILI9341_WHITE);
-    
+
     tft.println(textCap);
     tft.setCursor(50, 215);
     tft.println(F("Back"));
