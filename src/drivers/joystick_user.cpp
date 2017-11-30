@@ -19,8 +19,6 @@ Direction_t Joystick_Driver::getJoystickDirection(Direction_t current) {
     int y_joy = map(analogRead(this->pinY), 0, ANALOG_IN_SIZE, -ANALOG_IN_SIZE, ANALOG_IN_SIZE);
     int x_joy = map(analogRead(this->pinX), 0, ANALOG_IN_SIZE, -ANALOG_IN_SIZE, ANALOG_IN_SIZE);
 
-    SerialPrintf("X: %d, Y: %d\n\r", analogRead(this->pinX), analogRead(this->pinY));
-
     if (abs(y_joy) > abs(x_joy)) {             // if the y axis is pushed more then the x axis
         if (abs(y_joy) > ANALOG_IN_SIZE / 2) { // return north or south depending on the direction the jotsyick is pressed
             return((y_joy > 0) ? NORTH : SOUTH);
