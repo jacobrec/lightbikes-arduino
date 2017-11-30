@@ -7,7 +7,7 @@
 
 
 
-#define ANALOG_IN_SIZE     1023
+#define ANALOG_IN_SIZE    1023
 
 Joystick_Driver::Joystick_Driver(uint8_t pinX, uint8_t pinY) {
     this->pinX = pinX;
@@ -35,8 +35,6 @@ Direction_t Joystick_Driver::getJoystickDirection(Direction_t current) {
 Turn_t Joystick_Driver::steer(Grid_t *grid) {
     return(getTurn(getJoystickDirection(this->myBike->getDirection()), this->myBike->getDirection()));
 }
-
-
 
 Joystick_Driver *createUserR_Driver() {
     return(new Joystick_Driver(RIGHT_JOY_HORIZ, RIGHT_JOY_VERT));

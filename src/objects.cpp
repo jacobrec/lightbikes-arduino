@@ -53,7 +53,7 @@ Bike_t::Bike_t(int x, int y, int id, Direction_t dir, Driver_t *driver, uint16_t
 
     this->currentDirection = dir;
     this->driver           = driver;
-    this->colour          = colour;
+    this->colour           = colour;
 }
 
 void Bike_t::drive(Grid_t *grid) {

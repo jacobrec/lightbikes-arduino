@@ -4,7 +4,7 @@ GameScreen::GameScreen(Driver_t *d1, Driver_t *d2, uint16_t colour1, uint16_t co
     //this->grid = initWorld(160, 120, d1, d2);
     tft.setTextSize(5);
     this->grid = initWorld(32, 24, d1, d2, colour1, colour2);
-    drawGrid(this->grid);                    // initializes the graphics system, as well as draws boarder
+    drawGrid(this->grid);             // initializes the graphics system, as well as draws boarder
     render(this->grid);               // renders the world
 }
 

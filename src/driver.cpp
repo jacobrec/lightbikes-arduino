@@ -4,7 +4,7 @@
 #include "util.h"
 
 // useful functions that all drivers might want to use
-Turn_t getTurn(Direction_t to, Direction_t from){
+Turn_t getTurn(Direction_t to, Direction_t from) {
     // to and from are both direction enums, which are the north west, east, and south in a logical order so addition and subtraction with turns will make sense
     int turn = (to - from);
 
@@ -24,8 +24,6 @@ Turn_t getTurn(Direction_t to, Direction_t from){
     // otherwise if it is 0 or 2, either theyre turning straight, so return that. Or, they are trying to turn backwards, whcih is illegal, so also return straight
     return(STRAIGHT);
 }
-
-
 
 // This file is only to be used to include the drivers from the drivers folder
 // <DRIVERS>

@@ -1,6 +1,3 @@
-
-
-
 class LittleGrid {
 private:
 public:
@@ -11,6 +8,7 @@ public:
     ~LittleGrid();
 
     Tile getTile(int x, int y);
+
     void makeWall(int x, int y, uint8_t);
 
     int height;

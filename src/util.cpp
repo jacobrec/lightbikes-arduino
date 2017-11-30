@@ -13,8 +13,8 @@ int CellQueue::getLength() const {
 }
 
 CellQueue::CellQueue() {
-    head = NULL;
-    tail = NULL;
+    head   = NULL;
+    tail   = NULL;
     length = 0;
 }
 
@@ -27,7 +27,7 @@ CellQueue::~CellQueue() {
 void CellQueue::push(Cell c) {
     length++;
     QueueItem *tmp = new QueueItem(); // New **struct**
-    tmp->val  = c;               // No ctor.  Init here.
+    tmp->val  = c;                    // No ctor.  Init here.
     tmp->next = NULL;
 
     if (head == NULL) { // Special case
@@ -39,6 +39,7 @@ void CellQueue::push(Cell c) {
     }
     tail = tmp;           // New object is tail
 }
+
 Cell CellQueue::dequeue() {
     length--;
     Cell res = head->val;

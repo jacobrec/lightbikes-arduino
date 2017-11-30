@@ -11,15 +11,15 @@ typedef struct {
 } Cell;
 
 typedef struct item {
-    Cell        val;
+    Cell         val;
     struct item *next;
 } QueueItem;
 
 class CellQueue {
 private:
-    int   length;
-    QueueItem* head;
-    QueueItem* tail;
+    int        length;
+    QueueItem *head;
+    QueueItem *tail;
 public:
     int getLength() const;
 

@@ -24,7 +24,7 @@ int Possession_Driver::calculatePossession(Grid_t *grid, Turn_t turn) {
     int         ox; int oy; // other bikes x and y position
     Direction_t oDir;
 
-    SerialPrintf("Start: %d\n\r",freeRam());
+    SerialPrintf("Start: %d\n\r", freeRam());
 
     int         w        = grid->width;
     int         h        = grid->height;
@@ -131,7 +131,7 @@ int Possession_Driver::calculatePossession(Grid_t *grid, Turn_t turn) {
         else if (c.colour == 2) {
             theres++;
         }
-        if (cellGrid->getTile(x,y) == 0) {
+        if (cellGrid->getTile(x, y) == 0) {
             colourAndAddToQueue(cellGrid, que, x, y - 1, w, c.colour);
             colourAndAddToQueue(cellGrid, que, x, y + 1, w, c.colour);
             colourAndAddToQueue(cellGrid, que, x - 1, y, w, c.colour);
@@ -141,7 +141,7 @@ int Possession_Driver::calculatePossession(Grid_t *grid, Turn_t turn) {
 
     delete que;
     delete cellGrid;
-    SerialPrintf("End: %d\n\r",freeRam());
+    SerialPrintf("End: %d\n\r", freeRam());
 
     return(mine - theres);
 }

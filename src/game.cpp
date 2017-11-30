@@ -4,6 +4,7 @@
 Grid_t *initWorld(int width, int height, Driver_t *d1, Driver_t *d2, uint16_t colour1, uint16_t colour2) { // returns a new grid and sets the two drivers
     // setup code can go here
     Grid_t *grid = new Grid_t(width, height, d1, d2, colour1, colour2);
+
     return(grid);
 }
 
@@ -21,8 +22,6 @@ void update(Grid_t *grid) {
 
         checkCollision(grid->bike1, grid);
         checkCollision(grid->bike2, grid);
-
-
     }
 }
 
