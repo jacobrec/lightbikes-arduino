@@ -2,10 +2,16 @@
 
 
 
-void colourAndAddToQueue(LittleGrid *cellGrid, CellQueue *que, int x, int y, int w, uint8_t colour) {
+void colourAndAddToQueue(LittleGrid *cellGrid, CellQueue *que, int x, int y, int w, uint8_t colour, int& mCount, int& oCount) {
     if (cellGrid->getTile(x, y) == 0b00) {
         que->push({ x + y * w, colour });
         cellGrid->makeWall(x, y, colour);
+        if (colour == 1) {
+            mCount++;
+        }
+        else if (colour == 2) {
+            oCount++;
+        }
     }
 }
 
@@ -100,18 +106,18 @@ int Possession_Driver::calculatePossession(Grid_t *grid, Turn_t turn) {
     cellGrid->makeWall(mx, my, 3);
 
 
-    Cell c;
-    c.loc    = mx + my * w;
-    c.colour = 1;
-    que->push(c);
-    c.loc    = ox + oy * w;
-    c.colour = 2;
-    que->push(c);
+    que->push({ox + oy * w, 2});
+    que->push({mx + my * w, 1});
 
     int mine   = 0;
     int theres = 0;
 
     int iterator = 0;
+
+    int counterMine   = 1;
+    int counterTheres = 1;
+
+    Cell c;
     while (que->getLength() > 0) {
         c = que->dequeue();
         int x = c.loc % w;
@@ -120,17 +126,27 @@ int Possession_Driver::calculatePossession(Grid_t *grid, Turn_t turn) {
 
         if (c.colour == 1) {
             mine++;
+            counterMine--;
         }
         else if (c.colour == 2) {
             theres++;
+            counterTheres--;
         }
-        colourAndAddToQueue(cellGrid, que, x, y - 1, w, c.colour);
-        colourAndAddToQueue(cellGrid, que, x, y + 1, w, c.colour);
-        colourAndAddToQueue(cellGrid, que, x - 1, y, w, c.colour);
-        colourAndAddToQueue(cellGrid, que, x + 1, y, w, c.colour);
+        colourAndAddToQueue(cellGrid, que, x, y - 1, w, c.colour, counterMine, counterTheres);
+        colourAndAddToQueue(cellGrid, que, x, y + 1, w, c.colour, counterMine, counterTheres);
+        colourAndAddToQueue(cellGrid, que, x - 1, y, w, c.colour, counterMine, counterTheres);
+        colourAndAddToQueue(cellGrid, que, x + 1, y, w, c.colour, counterMine, counterTheres);
         iterator++;
-        if(iterator > 1000){// more iterations then normal
-            SerialPrintf("iterator: %d\n\r",iterator);
+        if (iterator > 1000) { // more iterations then normal
+            SerialPrintf("iterator: %d\n\r", iterator);
+        }
+        if (counterTheres <= 0) {
+            mine += (w * grid->width) - iterator;
+            break;
+        }
+        else if (counterMine <= 0) {
+            theres += (w * grid->width) - iterator;
+            break;
         }
     }
 
@@ -199,7 +215,7 @@ Tile LittleGrid::getTile(int x, int y) {
 }
 
 void LittleGrid::makeWall(int x, int y, uint8_t colour) {
-    if (x > this->width || x < 0 || y > this->height || y < 0) {
+    if (x >= this->width || x < 0 || y >= this->height || y < 0) {
         return;
     }
     int tileBlock = this->tiles[(x / 2 + (y / 2) * (this->width / 2))];  // grabs the datablock from the array of tiles
