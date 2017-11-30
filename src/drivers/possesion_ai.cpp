@@ -24,7 +24,7 @@ int Possession_Driver::calculatePossession(Grid_t *grid, Turn_t turn) {
     int         ox; int oy; // other bikes x and y position
     Direction_t oDir;
 
-    SerialPrintf("Start: %d\n\r", freeRam());
+    int startRam = freeRam();
 
     int         w        = grid->width;
     int         h        = grid->height;
@@ -92,6 +92,9 @@ int Possession_Driver::calculatePossession(Grid_t *grid, Turn_t turn) {
     if (grid->getTile(mx, my) != 0) { // if would die, return 0
         delete que;
         delete cellGrid;
+        if (startRam > freeRam()) {
+            SerialPrintf("Losing memory, started with %d but now we only have %d", startRam, freeRam());
+        }
         return(-32768);               // smallest int
     }
 
@@ -118,7 +121,7 @@ int Possession_Driver::calculatePossession(Grid_t *grid, Turn_t turn) {
     int mine   = 0;
     int theres = 0;
 
-
+    int iterator = 0;
     while (que->getLength() > 0) {
         c = que->dequeue();
         int x = c.loc % w;
@@ -131,17 +134,23 @@ int Possession_Driver::calculatePossession(Grid_t *grid, Turn_t turn) {
         else if (c.colour == 2) {
             theres++;
         }
-        if (cellGrid->getTile(x, y) == 0) {
-            colourAndAddToQueue(cellGrid, que, x, y - 1, w, c.colour);
-            colourAndAddToQueue(cellGrid, que, x, y + 1, w, c.colour);
-            colourAndAddToQueue(cellGrid, que, x - 1, y, w, c.colour);
-            colourAndAddToQueue(cellGrid, que, x + 1, y, w, c.colour);
+        colourAndAddToQueue(cellGrid, que, x, y - 1, w, c.colour);
+        colourAndAddToQueue(cellGrid, que, x, y + 1, w, c.colour);
+        colourAndAddToQueue(cellGrid, que, x - 1, y, w, c.colour);
+        colourAndAddToQueue(cellGrid, que, x + 1, y, w, c.colour);
+        iterator++;
+        if(iterator > 1000){// more iterations then normal
+            SerialPrintf("iterator: %d\n\r",iterator);
+
         }
     }
 
+
     delete que;
     delete cellGrid;
-    SerialPrintf("End: %d\n\r", freeRam());
+    if (startRam > freeRam()) {
+        SerialPrintf("Losing memory, started with %d but now we only have %d", startRam, freeRam());
+    }
 
     return(mine - theres);
 }
@@ -195,12 +204,15 @@ Tile LittleGrid::getTile(int x, int y) {
     // this switch statement determines which part of the datablock is selected by using the x and y
     int blockNum = ((x % 2)) + ((y % 2) * 2);
 
-    out = tileBlock & ((0b11 << (blockNum * 2)) >> (blockNum * 2));
+    out = (tileBlock & ((0b11 << (blockNum * 2)))) >> (blockNum * 2);
 
     return(out & 0b11); // the & 0b11 is not nessecary, but it has a negligible speed differnce and makes me feel better
 }
 
 void LittleGrid::makeWall(int x, int y, uint8_t colour) {
+    if (x > this->width || x < 0 || y > this->height || y < 0) {
+        return;
+    }
     int tileBlock = this->tiles[(x / 2 + (y / 2) * (this->width / 2))];  // grabs the datablock from the array of tiles
 
     int blockNum = ((x % 2)) + ((y % 2) * 2);

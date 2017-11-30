@@ -12,7 +12,7 @@ int main() {
 
     ScreenManager *screens = new ScreenManager(MILLIS_PER_CYCLE); // screen manager manages which screen to display
     screens->setScreen(new MainMenuScreen());                     //set the starting screen
-    //screens->setScreen(new GameScreen(new Possession_Driver, createUserL_Driver(), ILI9341_RED, ILI9341_BLUE));
+    screens->setScreen(new GameScreen(new Possession_Driver, new Runner_ai(), ILI9341_RED, ILI9341_BLUE));
     // main game loop
     while (true) {
         screens->manageScreen(); // tells screen to update
