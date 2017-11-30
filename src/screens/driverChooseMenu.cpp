@@ -1,6 +1,6 @@
 // IMPORTANT: this file is only to be included into screenManager.cpp and nowhere else
-#define ROSTER_COUNT       5
-#define DRIVER_MENU_MESSAGE "Choose your driver"
+#define ROSTER_COUNT           5
+#define DRIVER_MENU_MESSAGE    "Choose your driver"
 
 const char *driverNames[ROSTER_COUNT] = {
     "Player",
@@ -39,8 +39,8 @@ Driver_t *DriverSelectScreen::getNewDriver(int mode) {
 
         case 4:
             return(new Possession_Driver());
-
     }
+    return(NULL);
 }
 
 DriverSelectScreen::DriverSelectScreen() { // this is the constructor
@@ -50,7 +50,7 @@ DriverSelectScreen::DriverSelectScreen() { // this is the constructor
     tft.setTextSize(2);
 
     tft.setCursor(50, 5);
-	generateMenuScreen(DRIVER_MENU_MESSAGE);
+    generateMenuScreen(DRIVER_MENU_MESSAGE);
 
 
     for (int i = 0; i < ROSTER_COUNT; i++) {
@@ -81,10 +81,10 @@ void DriverSelectScreen::frame() {                        // this runs every fra
     TSPoint p = touch_screen.getPoint();
 
 
-    if (p.z > 50) {                  //pressure detect
+    if (p.z > 50) {                   //pressure detect
         if (p.x > 500 && p.y < 500) { //hitbox for start
-            Driver_t* d1 = this->getNewDriver(1);
-            Driver_t* d2 = this->getNewDriver(2);
+            Driver_t *d1 = this->getNewDriver(1);
+            Driver_t *d2 = this->getNewDriver(2);
             this->changeScreen(new ColorSelectScreen(d1, d2));
             //this->changeScreen(new ColorSelectScreen();
         }

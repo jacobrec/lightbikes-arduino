@@ -1,13 +1,13 @@
-#define Y1              120
-#define Y2              100
-#define Y3              140
-#define X_LEFT          55
-#define X_RIGHT         225
-#define SQUARE_SIZE     41
+#define Y1                     120
+#define Y2                     100
+#define Y3                     140
+#define X_LEFT                 55
+#define X_RIGHT                225
+#define SQUARE_SIZE            41
 
-#define COLOUR_COUNT    7
+#define COLOUR_COUNT           7
 
-#define COLOUR_MENU_MESSAGE "Choose your colour"
+#define COLOUR_MENU_MESSAGE    "Choose your colour"
 
 
 uint16_t ColorSelectScreen::fetchColor(int color) {
@@ -27,6 +27,7 @@ uint16_t ColorSelectScreen::fetchColor(int color) {
 
         case 6: return(ILI9341_WHITE);
     }
+    return(0);
 }
 
 ColorSelectScreen::ColorSelectScreen(Driver_t *d1, Driver_t *d2) { // this is the constructor
