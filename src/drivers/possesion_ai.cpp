@@ -2,16 +2,10 @@
 
 
 
-void colourAndAddToQueue(LittleGrid *cellGrid, CellQueue *que, int x, int y, int w, uint8_t colour, int& mCount, int& oCount) {
+void colourAndAddToQueue(LittleGrid *cellGrid, CellQueue *que, int x, int y, int w, uint8_t colour) {
     if (cellGrid->getTile(x, y) == 0b00) {
         que->push({ x + y * w, colour });
         cellGrid->makeWall(x, y, colour);
-        if (colour == 1) {
-            mCount++;
-        }
-        else if (colour == 2) {
-            oCount++;
-        }
     }
 }
 
@@ -114,9 +108,6 @@ int Possession_Driver::calculatePossession(Grid_t *grid, Turn_t turn) {
 
     int iterator = 0;
 
-    int counterMine   = 1;
-    int counterTheres = 1;
-
     Cell c;
     while (que->getLength() > 0) {
         c = que->dequeue();
@@ -132,21 +123,13 @@ int Possession_Driver::calculatePossession(Grid_t *grid, Turn_t turn) {
             theres++;
             counterTheres--;
         }
-        colourAndAddToQueue(cellGrid, que, x, y - 1, w, c.colour, counterMine, counterTheres);
-        colourAndAddToQueue(cellGrid, que, x, y + 1, w, c.colour, counterMine, counterTheres);
-        colourAndAddToQueue(cellGrid, que, x - 1, y, w, c.colour, counterMine, counterTheres);
-        colourAndAddToQueue(cellGrid, que, x + 1, y, w, c.colour, counterMine, counterTheres);
+        colourAndAddToQueue(cellGrid, que, x, y - 1, w, c.colour);
+        colourAndAddToQueue(cellGrid, que, x, y + 1, w, c.colour);
+        colourAndAddToQueue(cellGrid, que, x - 1, y, w, c.colour);
+        colourAndAddToQueue(cellGrid, que, x + 1, y, w, c.colour);
         iterator++;
         if (iterator > 1000) { // more iterations then normal
             SerialPrintf("iterator: %d\n\r", iterator);
-        }
-        if (counterTheres <= 0) {
-            mine += (w * grid->width) - iterator;
-            break;
-        }
-        else if (counterMine <= 0) {
-            theres += (w * grid->width) - iterator;
-            break;
         }
     }
 
