@@ -41,3 +41,10 @@ A.I. stratagy articles:
 - https://web.stanford.edu/~jbboin/doc/ai_lightcycle.pdf
 - http://www.sifflez.org/misc/tronbot/index.html
 - https://www.a1k0n.net/2010/03/04/google-ai-postmortem.html
+
+
+## Things to do
+- Refactor, this project is fairly nicely organized, but it could be improved. Code reuse between the drivers is fairly minimal, and could definitely be improved upon.
+As well, we have a hierarchical code structure, but our makefile doesn't really account for that, and it should. So figuring that out would be nice.
+- Improve the U.I. there are a some things we could do to make it work nicer. Like have a play again with same drivers button, or have a best of X games setting.
+- Improve the A.I.'s, our good A.I. is slow, and it would be nicer if it was faster. Or come up with a different algorithm that runs faster, but still plays smart
