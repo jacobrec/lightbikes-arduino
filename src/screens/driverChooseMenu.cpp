@@ -3,11 +3,11 @@
 const char *DRIVER_MENU_MESSAGE = "Choose your driver";
 
 const char *driverNames[ROSTER_COUNT] = {
-    "Player",
-    "Hunter",
-    "Coward",
+    " Player ",
+    " Hunter ",
+    " Coward ",
     "Survivor",
-    "Hoarder"
+    " Keeper "
 };
 
 Driver_t *DriverSelectScreen::getNewDriver(int mode) {
@@ -44,15 +44,16 @@ Driver_t *DriverSelectScreen::getNewDriver(int mode) {
 }
 
 DriverSelectScreen::DriverSelectScreen() { // this is the constructor
+    //set var
     this->highlightDriver1 = 0;
     this->highlightDriver2 = 0;
-    tft.fillScreen(ILI9341_BLACK);
+
+    //draw screen
+    tft.fillScreen(0x0100);
     tft.setTextSize(2);
+    generateMenuScreen(DRIVER_MENU_MESSAGE, "Next");
 
-    tft.setCursor(50, 5);
-    generateMenuScreen(DRIVER_MENU_MESSAGE);
-
-
+    //draw names
     for (int i = 0; i < ROSTER_COUNT; i++) {
         drawName(i, driverNames[i], highlightDriver1, 1); //drivers is str of driver types
         drawName(i, driverNames[i], highlightDriver2, 2);

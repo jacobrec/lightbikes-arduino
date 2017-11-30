@@ -31,28 +31,33 @@ uint16_t ColorSelectScreen::fetchColor(int color) {
 }
 
 ColorSelectScreen::ColorSelectScreen(Driver_t *d1, Driver_t *d2) { // this is the constructor
+    //initialize menu items
     tft.setTextSize(2);
-    tft.setCursor(60, 5);
-    tft.fillScreen(ILI9341_BLACK);
-    generateMenuScreen(COLOUR_MENU_MESSAGE);
+    tft.fillScreen(0x0100);
+    generateMenuScreen(COLOUR_MENU_MESSAGE, "Start");
+
+    //assign variables
     this->currentColor1 = 0;
     this->currentColor2 = 1;
     this->d1            = d1;
     this->d2            = d2;
-    tft.fillTriangle(X_LEFT - 35, Y1, X_LEFT - 15, Y2, X_LEFT - 15, Y3, ILI9341_WHITE);
-    tft.fillTriangle(X_LEFT + 75, Y1, X_LEFT + 55, Y2, X_LEFT + 55, Y3, ILI9341_WHITE);
-    tft.fillTriangle(X_RIGHT - 35, Y1, X_RIGHT - 15, Y2, X_RIGHT - 15, Y3, ILI9341_WHITE);
-    tft.fillTriangle(X_RIGHT + 75, Y1, X_RIGHT + 55, Y2, X_RIGHT + 55, Y3, ILI9341_WHITE);
+
+    //draw special items for specific screen
+    tft.fillTriangle(X_LEFT - 35, Y1, X_LEFT - 15, Y2, X_LEFT - 15, Y3, 0x0380);
+    tft.fillTriangle(X_LEFT + 75, Y1, X_LEFT + 55, Y2, X_LEFT + 55, Y3, 0x0380);
+    tft.fillTriangle(X_RIGHT - 35, Y1, X_RIGHT - 15, Y2, X_RIGHT - 15, Y3, 0x0380);
+    tft.fillTriangle(X_RIGHT + 75, Y1, X_RIGHT + 55, Y2, X_RIGHT + 55, Y3, 0x0380);
     tft.fillRect(X_LEFT, Y2, SQUARE_SIZE, SQUARE_SIZE, ColorSelectScreen::fetchColor(currentColor1));
     tft.fillRect(X_RIGHT, Y2, SQUARE_SIZE, SQUARE_SIZE, ColorSelectScreen::fetchColor(currentColor2));
 }
 
 void ColorSelectScreen::frame() { // this runs every frame
+    //remember old values
     int oldColor1 = currentColor1;
     int oldColor2 = currentColor2;
 
     TSPoint p = touch_screen.getPoint();
-
+    //touch logic
     if (p.z > 50) { //pressure detect
         //SerialPrintf("p.x: %d, p.y %d, p.z: %d\r\n",p.x,p.y,p.z);
         if (p.x > 360 && p.x < 600) {
@@ -86,6 +91,8 @@ void ColorSelectScreen::frame() { // this runs every frame
         // Serial.println(currentColor1);
         // Serial.println(currentColor2);
     }
+
+    //check if need to redraw color squares
     if (oldColor1 != currentColor1 || oldColor2 != currentColor2) {
         //Serial.print("Printing rect");
         tft.fillRect(X_LEFT, Y2, SQUARE_SIZE, SQUARE_SIZE, ColorSelectScreen::fetchColor(currentColor1));
