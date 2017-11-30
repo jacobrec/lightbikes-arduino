@@ -7,7 +7,7 @@
 
 #define COLOUR_COUNT           7
 
-#define COLOUR_MENU_MESSAGE    "Choose your colour"
+const char *COLOUR_MENU_MESSAGE = "Choose your colour";
 
 
 uint16_t ColorSelectScreen::fetchColor(int color) {

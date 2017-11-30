@@ -1,6 +1,6 @@
 // IMPORTANT: this file is only to be included into screenManager.cpp and nowhere else
 #define ROSTER_COUNT           5
-#define DRIVER_MENU_MESSAGE    "Choose your driver"
+const char *DRIVER_MENU_MESSAGE = "Choose your driver";
 
 const char *driverNames[ROSTER_COUNT] = {
     "Player",
