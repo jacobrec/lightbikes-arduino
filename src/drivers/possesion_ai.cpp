@@ -131,7 +131,6 @@ int Possession_Driver::calculatePossession(Grid_t *grid, Turn_t turn) {
         iterator++;
         if(iterator > 1000){// more iterations then normal
             SerialPrintf("iterator: %d\n\r",iterator);
-
         }
     }
 

@@ -75,20 +75,8 @@ int joyControl(int driverID) {
     }
 }
 
-int wrapAround(int var, int low, int high)
-{
-	if (var < low)
-	{
-		return(high);
-	}
-	else if (var > high)
-	{
-		return(low);
-	}
-	else
-	{
-		return(var);
-	}
+int wrapAround(int var, int count) {
+    return((var + count) % count);
 }
 
 #include "screens/game_screen.cpp"

@@ -1,6 +1,6 @@
 // IMPORTANT: this file is only to be included into screenManager.cpp and nowhere else
 #define ROSTER_COUNT       5
-
+#define DRIVER_MENU_MESSAGE "Choose your driver"
 
 const char *driverNames[ROSTER_COUNT] = {
     "Player",
@@ -11,7 +11,7 @@ const char *driverNames[ROSTER_COUNT] = {
 };
 
 Driver_t *DriverSelectScreen::getNewDriver(int mode) {
-    int highlight;
+    int highlight = 0;
 
     if (mode == 1) {
         highlight = this->highlightDriver1;
@@ -50,7 +50,7 @@ DriverSelectScreen::DriverSelectScreen() { // this is the constructor
     tft.setTextSize(2);
 
     tft.setCursor(50, 5);
-	generateMenuScreen("Choose your driver");
+	generateMenuScreen(DRIVER_MENU_MESSAGE);
 
 
     for (int i = 0; i < ROSTER_COUNT; i++) {
@@ -64,8 +64,8 @@ void DriverSelectScreen::frame() {                        // this runs every fra
     int oH2 = highlightDriver2;
 
 
-    highlightDriver1 = wrapAround(highlightDriver1 + joyControl(1), 0, 5); //keep values of highlight between 0 and 4;
-    highlightDriver2 = wrapAround(highlightDriver2 + joyControl(2), 0, 5);
+    highlightDriver1 = wrapAround(highlightDriver1 + joyControl(1), ROSTER_COUNT); //keep values of highlight between 0 and 4;
+    highlightDriver2 = wrapAround(highlightDriver2 + joyControl(2), ROSTER_COUNT);
 
     if (oH1 != highlightDriver1) {
         for (int i = 0; i < ROSTER_COUNT; i++) {

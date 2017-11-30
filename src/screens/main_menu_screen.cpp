@@ -26,7 +26,7 @@ void MainMenuScreen::frame() { // this runs every frame
     TSPoint p = touch_screen.getPoint();
 
     if (p.z > 50) { //pressure detect
-        Serial.println("started");
+        //Serial.println("started");
         this->changeScreen(new DriverSelectScreen); //if press, move to driver select
     }
 }

@@ -45,7 +45,7 @@ public:
 
 int joyControl(int driverID);
 
-int wrapAround(int var, int low, int high);
+int wrapAround(int var, int count);
 
 #include "screens/game_screen.h"
 #include "screens/main_menu_screen.h"
