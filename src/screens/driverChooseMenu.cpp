@@ -3,11 +3,11 @@
 const char *DRIVER_MENU_MESSAGE = "Choose your driver";
 
 const char *driverNames[ROSTER_COUNT] = {
-    "Player",
-    "Hunter",
-    "Coward",
+    " Player ",
+    " Hunter ",
+    " Coward ",
     "Survivor",
-    "Hoarder"
+    " Keeper "
 };
 
 Driver_t *DriverSelectScreen::getNewDriver(int mode) {
