@@ -58,9 +58,9 @@ If too slow with all the searching on every point, use a Monte Carlo approximati
 
 ## Milestone goals
 - [x] Have a working two player light bike game
-- [ ] Create a basic title screen
+- [x] Create a basic title screen
 - [x] Create a basic A.I. player for 1 player mode
-- [ ] Create player color selection system
+- [x] Create player color selection system
 - [ ] Create a title screen with A.I. players competing
-- [ ] Create a more advanced A.I. (new A.I. or variable difficulty for basic A.I.)
-- [ ] Adjustable difficulties for the A.I.
+- [x] Create a more advanced A.I. (new A.I. or variable difficulty for basic A.I.)
+- [x] Adjustable difficulties for the A.I.
